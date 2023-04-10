@@ -31,7 +31,10 @@ jobs:
           channel: stable
 
       - name: Generate Dart documentation
-        run: ${{ env.FLUTTER_ROOT }}/bin/cache/dart-sdk/bin/dart doc --output ./docs
+        run: ${{ env.FLUTTER_ROOT }}/bin/cache/dart-sdk/bin/dart doc --output ./dartdocs
+
+      - name: Copy Dart documentation to Jekyll source
+        run: cp -R ./dartdocs/* ./docs/
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -39,9 +42,10 @@ jobs:
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./
+          source: ./docs
           destination: ./_site
           build_opts: --baseurl /${{ github.ref_name }}
+
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2

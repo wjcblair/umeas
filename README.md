@@ -14,3 +14,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+[![Feature Branch CI](https://github.com/wjcblair/umeas/actions/workflows/feature.yaml/badge.svg?branch=feature%2Fproject_setup)](https://github.com/wjcblair/umeas/actions/workflows/feature.yaml)
+

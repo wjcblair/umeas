@@ -1,0 +1,19 @@
+name: Feature Branch CI
+
+on:
+  push:
+    branches:
+      - 'feature/*'
+  pull_request:
+    branches:
+      - 'development'
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Harden Security and Run Base Workflow
+        uses: ./.github/workflows/harden-and-setup.yaml
+        with:
+          flavor: dev
+    

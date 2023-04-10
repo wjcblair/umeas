@@ -1,0 +1,53 @@
+name: Harden Security and Run Base Workflow
+
+on:
+  workflow_call:
+    inputs:
+      flavor:
+        required: true
+        type: string
+
+jobs:
+  harden_security:
+    name: Harden Security
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # v2.3.4
+      - name: Ensure SHA pinned actions
+        uses: zgosalvez/github-actions-ensure-sha-pinned-actions@v2 # Replace this
+
+  setup:
+    name: Base workflow setup
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+
+      - name: Restore packages
+        run: flutter pub get
+
+      - name: Determine Flavor
+        id: determine_flavor
+        run: echo "::set-output name=flavor::${{ inputs.flavor }}"
+      
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test --coverage --flavor ${{ steps.determine_flavor.outputs.flavor }}
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+
+      - name: Generate documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{secrets.DEPLOY_KEY}}
+          publish_dir: ./doc/api

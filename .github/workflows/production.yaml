@@ -1,0 +1,34 @@
+name: Production Branch CI
+
+on:
+  push:
+    branches:
+      - 'production/*'
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Harden Security and Run Base Workflow
+        uses: ./.github/workflows/harden-and-setup.yaml
+        with:
+          flavor: prod
+
+  # build_and_upload_to_firebase_and_stores:
+  #   needs: harden_and_setup
+  #   runs-on: macos-latest
+  #   steps:
+  #     - name: Build and upload to Firebase App Distribution
+  #       env:
+  #         FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+  #         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  #       run: |
+  #         flutter build appbundle
+  #         curl -sL https://firebase.tools/bin/linux/latest -o firebase
+  #         chmod +x firebase
+  #         ./firebase appdistribution:distribute --app $FIREBASE_APP_ID --token $FIREBASE_TOKEN --groups "QA" build/app/outputs/bundle/release/app-release.aab
+
+  #     - name: Deploy to Google Play and Apple App Store using Fastlane
+  #       env:
+  #         ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+  #         ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID

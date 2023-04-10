@@ -1,0 +1,29 @@
+name: Release Branch Workflow
+
+on:
+  push:
+    branches:
+      - 'release/*'
+  pull_request:
+    branches:
+      - 'production'
+      - 'development'
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Harden Security and Run Base Workflow
+        uses: ./.github/workflows/harden-and-setup.yaml
+        with:
+          flavor: prod
+
+  # prepare_release:
+  #   runs-on: ubuntu-latest
+  #   steps:
+      # Build app
+      # Run tests
+      # Report code coverage
+      # Linting and static analysis
+      # Update version numbers
+      # Generate release notes

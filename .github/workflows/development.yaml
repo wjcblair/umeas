@@ -1,0 +1,38 @@
+name: Development Branch CI
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Harden Security and Run Base Workflow
+        uses: ./.github/workflows/harden-and-setup.yaml
+        with:
+          flavor: prod
+
+  # build_and_upload_to_firebase:
+  #     needs: harden_and_setup
+  #     runs-on: macos-latest
+  #     steps:
+  #       - name: Checkout the code
+  #         uses: actions/checkout@v2
+
+  #       - name: Install and set Flutter version
+  #         uses: subosito/flutter-action@v2
+  #         with:
+  #           flutter-version: '3.x'
+  #           channel: 'stable'
+
+  #       - name: Build and upload to Firebase App Distribution
+  #         env:
+  #           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+  #           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  #         run: |
+  #           flutter build appbundle
+  #           curl -sL https://firebase.tools/bin/linux/latest -o firebase
+  #           chmod +x firebase
+  #           ./firebase appdistribution:distribute --app $FIREBASE_APP_ID --token $FIREBASE_TOKEN --groups "QA" build/app/outputs/bundle/release/app-release.aab  

@@ -7,7 +7,7 @@ on:
       
 jobs:
   build_and_test:
-    uses: ./.github/workflows/harden-and-setup.yaml
+    uses: ./.github/workflows/dev.yaml
     with:
       flavor: dev
 

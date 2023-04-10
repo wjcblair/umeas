@@ -10,26 +10,6 @@ on:
 
 jobs:
   build_and_test:
-    name: Base workflow setup
-    runs-on: macos-latest
-    steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
-
-      - name: Install and set Flutter version
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.x'
-          channel: 'stable'
-
-      - name: Restore packages
-        run: flutter pub get
-
-      - name: Analyze
-        run: flutter analyze
-
-      - name: Run tests
-        run: flutter test --coverage --flavor dev
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
+    uses: ./.github/workflows/ci.yaml
+    with:
+      flavor: dev

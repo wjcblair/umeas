@@ -1,4 +1,4 @@
-name: Harden Security and Run Base Workflow
+name: Continuous Integration Workflow
 
 on:
   workflow_call:
@@ -8,15 +8,15 @@ on:
         type: string
 
 jobs:
-  harden_security:
-    name: Harden Security
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  # harden_security:
+  #   name: Harden Security
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
 
-      - name: Ensure SHA Pinned Actions
-        uses: zgosalvez/github-actions-ensure-sha-pinned-actions@v2.1.2
+  #     - name: Ensure SHA Pinned Actions
+  #       uses: zgosalvez/github-actions-ensure-sha-pinned-actions@v2.1.2
 
 
   setup:
@@ -35,15 +35,11 @@ jobs:
       - name: Restore packages
         run: flutter pub get
 
-      - name: Determine Flavor
-        id: determine_flavor
-        run: echo "::set-output name=flavor::${{ inputs.flavor }}"
-
       - name: Analyze
         run: flutter analyze
 
       - name: Run tests
-        run: flutter test --coverage --flavor ${{ steps.determine_flavor.outputs.flavor }}
+        run: flutter test --coverage --flavor ${{inputs.flavor}}
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3

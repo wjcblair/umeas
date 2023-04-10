@@ -34,16 +34,6 @@ jobs:
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
 
-      # Install Jekyll and dependencies
-      - name: Install Jekyll
-        run: |
-          gem install bundler jekyll
-          bundle install
-
-      # Build Jekyll site
-      - name: Build Jekyll site
-        run: bundle exec jekyll build
-
       # Generate documentation and publish to gh-pages
       - name: Generate documentation
         uses: peaceiris/actions-gh-pages@v3

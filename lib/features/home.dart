@@ -39,9 +39,9 @@ class _HomePageState extends State<HomePage> {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             Text(
-              'Environment:\n${ConfigReader.environmentName}',
+              'Revealed secret:\n${ConfigReader.secretKey}',
               textAlign: TextAlign.center,
-            ),
+            )
           ],
         ),
       ),

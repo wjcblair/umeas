@@ -1,5 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'dart:convert';
 
 abstract class ConfigReader {
   static Map<String, dynamic>? _config;
@@ -9,12 +9,6 @@ abstract class ConfigReader {
     _config = json.decode(configString) as Map<String, dynamic>;
   }
 
-  static String get environmentName => _config?['environmentName'] as String;
-
-  static bool get enableLogging => _config?['enableLogging'] as bool;
-
-  static bool get performanceOptimization =>
-      _config?['performanceOptimization'] as bool;
-
-  static bool get enableAnalytics => _config?['enableAnalytics'] as bool;
+  static int get incrementAmount => _config?['incrementAmount'] as int;
+  static String get secretKey => _config?['secretKey'] as String;
 }

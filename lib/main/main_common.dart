@@ -12,40 +12,36 @@ Future<void> mainCommon(Environment env) async {
   await ConfigReader.initialize();
 
   Color primaryColor;
+  // ignore: unused_local_variable
+  bool enableLogging;
+  // ignore: unused_local_variable
+  bool performanceOptimization;
+  // ignore: unused_local_variable
+  bool enableAnalytics;
+  // ignore: unused_local_variable
+  String environmentName;
+
   switch (env) {
     case Environment.dev:
       primaryColor = Colors.blue;
+      enableLogging = true;
+      performanceOptimization = false;
+      enableAnalytics = false;
+      environmentName = 'Development';
       break;
     case Environment.prod:
       primaryColor = Colors.red;
+      enableLogging = false;
+      performanceOptimization = true;
+      enableAnalytics = true;
+      environmentName = 'Production';
       break;
-  }
-
-  // Set up logging based on the configuration
-  if (ConfigReader.enableLogging) {
-    // Initialize your logging system, e.g., set up a logger
-  } else {
-    // Disable logging or use a no-op logger
-  }
-
-  // Set up performance optimization based on the configuration
-  if (ConfigReader.performanceOptimization) {
-    // Enable performance optimization features, e.g., set up a custom image cache
-  } else {
-    // Use default performance settings
-  }
-
-  // Set up analytics based on the configuration
-  if (ConfigReader.enableAnalytics) {
-    // Initialize your analytics system, e.g., set up Firebase Analytics
-  } else {
-    // Disable analytics or use a no-op analytics system
   }
 
   runApp(
     Provider.value(
       value: primaryColor,
-      child: const UmeasApp(),
+      child: UmeasApp(),
     ),
   );
 }

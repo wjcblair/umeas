@@ -3,9 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../features/home.dart';
 
+// ignore: use_key_in_widget_constructors
 class UmeasApp extends StatelessWidget {
-  const UmeasApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

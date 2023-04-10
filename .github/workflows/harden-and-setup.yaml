@@ -13,9 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # v2.3.4
-      - name: Ensure SHA pinned actions
-        uses: zgosalvez/github-actions-ensure-sha-pinned-actions@v2 # Replace this
+      uses: actions/checkout@v2
+
+      - name: Run OSSAR
+        id: ossar
+        uses: microsoft/ossar-action@v1
+
+      - name: Upload results to Security tab
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: ${{ steps.ossar.outputs.sarifFile }}
 
   setup:
     name: Base workflow setup

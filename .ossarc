@@ -1,0 +1,7 @@
+{
+  "ossar": {
+    "workflowLint": {
+      "mustPinAction": true
+    }
+  }
+}

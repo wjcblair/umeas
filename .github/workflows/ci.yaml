@@ -23,7 +23,7 @@ jobs:
 
 
   setup:
-    name: Base workflow setup # to test branch status check #2
+    name: Base workflow setup # to test branch status check # test 2
     runs-on: macos-latest
     steps:
       - name: Checkout the code

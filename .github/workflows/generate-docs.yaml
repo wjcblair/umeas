@@ -44,7 +44,7 @@ jobs:
           build_opts: --baseurl /${{ github.ref_name }}
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: _site
           path: ./_site
@@ -62,11 +62,11 @@ jobs:
           name: _site
           path: ./_site
 
-
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          path: ./_site
-          target_branch: gh-pages
-          target_directory: ${{ github.ref_name }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          cname: ${{ github.ref_name }}

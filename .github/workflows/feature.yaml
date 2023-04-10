@@ -9,7 +9,55 @@ on:
       - 'development'
 
 jobs:
-  build_and_test:
-    uses: ./.github/workflows/harden-and-setup.yaml
-    with:
-      flavor: dev
+  harden_security:
+      name: Harden Security
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: Ensure SHA Pinned Actions
+          uses: zgosalvez/github-actions-ensure-sha-pinned-actions@v2.1.2
+
+
+  setup:
+    name: Base workflow setup
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+
+      - name: Restore packages
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test --coverage --flavor dev
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+
+      # Install Jekyll and dependencies
+      - name: Install Jekyll
+        run: |
+          gem install bundler jekyll
+          bundle install
+
+      # Build Jekyll site
+      - name: Build Jekyll site
+        run: bundle exec jekyll build
+
+      # Generate documentation and publish to gh-pages
+      - name: Generate documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{secrets.DEPLOY_KEY}}
+          publish_dir: ./_site

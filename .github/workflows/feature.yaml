@@ -35,8 +35,10 @@ jobs:
         uses: codecov/codecov-action@v3
 
       # Generate documentation and publish to gh-pages
-      - name: Generate documentation
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{secrets.DEPLOY_KEY}}
-          publish_dir: ./docs/api
+          deploy_key: ${{ secrets.PAT }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+

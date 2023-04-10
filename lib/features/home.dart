@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import '../config/config_reader.dart';
 
 class HomePage extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const HomePage({required this.title});
+  const HomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -14,6 +13,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      _counter += 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,12 +31,24 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
             Text(
-              'Current Env:\n${ConfigReader.environmentName}',
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            Text(
+              'Environment:\n${ConfigReader.environmentName}',
               textAlign: TextAlign.center,
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
       ),
     );
   }

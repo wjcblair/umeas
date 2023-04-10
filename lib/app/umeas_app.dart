@@ -13,7 +13,10 @@ class UmeasApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Provider.of<MaterialColor>(context),
       ),
-      home: const HomePage(title: 'Flutter CI with Flavors!'),
+      home: const HomePage(
+        title: 'Flutter CI with Flavors!',
+        key: null,
+      ),
     );
   }
 }

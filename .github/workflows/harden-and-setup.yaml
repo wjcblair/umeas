@@ -15,14 +15,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run OSSAR
-        id: ossar
-        uses: microsoft/ossar-action@v1
+      - name: Ensure SHA Pinned Actions
+        uses: zgosalvez/github-actions-ensure-sha-pinned-actions@v2.1.2
 
-      - name: Upload results to Security tab
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: ${{ steps.ossar.outputs.sarifFile }}
 
   setup:
     name: Base workflow setup

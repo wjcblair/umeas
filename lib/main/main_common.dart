@@ -45,7 +45,7 @@ Future<void> mainCommon(Environment env) async {
   runApp(
     Provider.value(
       value: primaryColor,
-      child: UmeasApp(),
+      child: const UmeasApp(),
     ),
   );
 }

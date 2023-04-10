@@ -8,19 +8,7 @@ on:
     branches:
       - 'development'
 
-jobs:
-  harden_security:
-      name: Harden Security
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v2
-
-        - name: Ensure SHA Pinned Actions
-          uses: zgosalvez/github-actions-ensure-sha-pinned-actions@v2.1.2
-
-
-  setup:
+  build_and_test:
     name: Base workflow setup
     runs-on: macos-latest
     steps:

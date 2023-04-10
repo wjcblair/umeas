@@ -14,3 +14,5 @@ jobs:
     uses: ./.github/workflows/ci.yaml
     with:
       flavor: dev
+    secrets:
+      PAT: ${{ secrets.PAT }}

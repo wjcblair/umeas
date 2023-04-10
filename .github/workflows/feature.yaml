@@ -10,6 +10,7 @@ on:
 
 jobs:
   build_and_test:
+    name: Build and test
     uses: ./.github/workflows/ci.yaml
     with:
       flavor: dev

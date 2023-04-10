@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - development
-
+      
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       - name: Call Harden Security and Run Base Workflow
         uses: ./.github/workflows/harden-and-setup.yaml
         with:
-          flavor: prod
+          flavor: dev
 
   # build_and_upload_to_firebase:
   #     needs: harden_and_setup
@@ -36,3 +36,18 @@ jobs:
   #           curl -sL https://firebase.tools/bin/linux/latest -o firebase
   #           chmod +x firebase
   #           ./firebase appdistribution:distribute --app $FIREBASE_APP_ID --token $FIREBASE_TOKEN --groups "QA" build/app/outputs/bundle/release/app-release.aab  
+
+
+# github-pages:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/cache@v2
+#         with:
+#           path: vendor/bundle
+#           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile') }}
+#           restore-keys: |
+#             ${{ runner.os }}-gems-
+#       - uses: helaili/jekyll-action@2.0.5    # Choose any one of the Jekyll Actions
+#         with:                                # Some relative inputs of your action
+#           token: ${{ secrets.GITHUB_TOKEN }}

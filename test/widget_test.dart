@@ -7,13 +7,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:umeas/app/umeas_app.dart';
 
-import 'package:umeas/main.dart';
+import 'package:umeas/main/main_common.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(UmeasApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

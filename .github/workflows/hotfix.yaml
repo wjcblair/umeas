@@ -11,12 +11,9 @@ on:
 
 jobs:
   build_and_test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Call Harden Security and Run Base Workflow
-        uses: ./.github/workflows/harden-and-setup.yaml
-        with:
-          flavor: dev
+    uses: ./.github/workflows/harden-and-setup.yaml
+    with:
+      flavor: dev
 
   # fix_and_test:
   #   runs-on: ubuntu-latest

@@ -2,8 +2,8 @@ name: Feature Branch CI
 
 on:
   push:
-    # branches:
-    #   - 'feature/*'
+    branches:
+      - 'feature/*'
   pull_request:
     branches:
       - 'development'

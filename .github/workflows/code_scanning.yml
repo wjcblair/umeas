@@ -1,0 +1,26 @@
+name: Code Scanning
+
+on:
+  push:
+    branches: [development, production, release/*]
+  pull_request:
+    branches: [development, production, release/*]
+
+jobs:
+  code_scanning:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Dart SDK
+      uses: dart-lang/setup-dart@v1
+      with:
+        sdk: stable
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Run dart_code_metrics
+      run: flutter pub run dart_code_metrics:metrics lib

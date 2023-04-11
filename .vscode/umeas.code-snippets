@@ -1,0 +1,32 @@
+{
+	"Basic test scaffolding": {
+		"prefix": "t_scaffold",
+		"body": [
+			"import 'package:flutter_test/flutter_test.dart';",
+			"",
+			"void main() {",
+			"  late ${1:ClassName} sut;",
+			"",
+			"  setUp(() {",
+			"    sut = ${1:ClassName}();",
+			"  });",
+			"",
+			"  group('', () {});",
+			"}",
+			""
+		],
+		"description": "Basic test scaffolding"
+	},
+	"Test following the Arrange-Act-Assert pattern": {
+		"prefix": "aaaTest",
+		"body": [
+			"test(",
+			"  \"$1\",",
+			"  () async {",
+			"    $2",
+			"  },",
+			");"
+		],
+		"description": "Test following the Arrange-Act-Assert pattern"
+	},
+}

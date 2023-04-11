@@ -33,8 +33,8 @@ void main() {
         await tester.pumpWidget(MaterialApp(
           home: sut,
           routes: {
-            '/onboarding': (BuildContext context) => const HomePage(
-                  title: 'Home Page',
+            '/home': (BuildContext context) => Scaffold(
+                  appBar: AppBar(title: const Text('Next Page')),
                 ),
           },
         ));
@@ -45,7 +45,8 @@ void main() {
         await tester.pumpAndSettle();
 
         // Assert
-        expect(find.byType(HomePage), findsOneWidget);
+        expect(find.byType(Scaffold), findsOneWidget);
+        expect(find.text('Next Page'), findsOneWidget);
       },
     );
   });

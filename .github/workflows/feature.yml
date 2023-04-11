@@ -1,0 +1,18 @@
+name: Feature Branch CI
+
+on:
+  push:
+    branches:
+      - 'feature/*'
+  pull_request:
+    branches:
+      - 'development'
+
+jobs:
+  build_and_test:
+    name: Build and test
+    uses: ./.github/workflows/ci.yaml
+    with:
+      flavor: dev
+    secrets:
+      PAT: ${{ secrets.PAT }}

@@ -1,0 +1,52 @@
+name: Continuous Integration Workflow
+
+on:
+  workflow_call:
+    inputs:
+      flavor:
+        required: true
+        type: string
+    secrets:
+      PAT:
+        required: true
+
+jobs:
+  # harden_security:
+  #   name: Harden Security
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+
+  #     - name: Ensure SHA Pinned Actions
+  #       uses: zgosalvez/github-actions-ensure-sha-pinned-actions@v2.1.2
+
+
+  setup:
+    name: Base workflow setup # to test branch status check # test 2
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+        with:
+            fetch-depth: 0
+            token: ${{ secrets.PAT }}
+
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Restore packages
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test --coverage --flavor ${{inputs.flavor}}
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3

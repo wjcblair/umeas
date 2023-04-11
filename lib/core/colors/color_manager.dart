@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ColorManager {
+  static Color white = const Color(0xffffffff);
+
   static MaterialColor createMaterialColor(Color color) {
     List strengths = <double>[.05];
     Map<int, Color> swatch = {};

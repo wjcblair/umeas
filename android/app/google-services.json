@@ -38,6 +38,101 @@
             {
               "client_id": "936924852215-l2o3uin5f5b3cg2veu5pulcirs0sos14.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "936924852215-qkl27so2u6jbqr69fiqtk9o4m6v82sqq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "xyz.wjcblair.umeas"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936924852215:android:270a852294d42ac12a08f2",
+        "android_client_info": {
+          "package_name": "xyz.wjcblair.umeas.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936924852215-h01kjq8vd3v929pet6qi0345qpc7d035.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "xyz.wjcblair.umeas.dev",
+            "certificate_hash": "5f1cb29815ce67c9e17abfc2ba579c883ce0689f"
+          }
+        },
+        {
+          "client_id": "936924852215-l2o3uin5f5b3cg2veu5pulcirs0sos14.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEtUKDQdxIqQJCLFOnDZ2mgSPWhVJasUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936924852215-l2o3uin5f5b3cg2veu5pulcirs0sos14.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "936924852215-qkl27so2u6jbqr69fiqtk9o4m6v82sqq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "xyz.wjcblair.umeas"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936924852215:android:3e8b6c861388c1d12a08f2",
+        "android_client_info": {
+          "package_name": "xyz.wjcblair.umeas.prod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936924852215-6fqa5gmg9fnd7qk16p3t5uj0hjbg9ava.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "xyz.wjcblair.umeas.prod",
+            "certificate_hash": "5f1cb29815ce67c9e17abfc2ba579c883ce0689f"
+          }
+        },
+        {
+          "client_id": "936924852215-l2o3uin5f5b3cg2veu5pulcirs0sos14.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEtUKDQdxIqQJCLFOnDZ2mgSPWhVJasUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936924852215-l2o3uin5f5b3cg2veu5pulcirs0sos14.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "936924852215-qkl27so2u6jbqr69fiqtk9o4m6v82sqq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "xyz.wjcblair.umeas"
+              }
             }
           ]
         }

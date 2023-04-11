@@ -73,27 +73,18 @@ android {
        }
    }
    bundle {
-    language {
-        enableSplit = false
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
+        }
     }
-    density {
-        enableSplit = true
-    }
-    abi {
-        enableSplit = true
-    }
-}
-}
 
-flutter {
-    source '../..'
-}
-
-dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
-
-flavorDimensions "flavor-type"
+    flavorDimensions "flavor-type"
 
     productFlavors {
         dev {
@@ -104,6 +95,20 @@ flavorDimensions "flavor-type"
         }
         prod {
             dimension "flavor-type"
+            applicationIdSuffix ".prod"
+            versionNameSuffix "-prod"
             manifestPlaceholders = [appName: "umeas PROD"]
         }
     }
+    
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+    

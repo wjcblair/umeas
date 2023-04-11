@@ -4,6 +4,7 @@ import 'package:umeas/app/umeas_app.dart';
 
 import '../config/config_reader.dart';
 import '../env/environment.dart';
+import 'core/colors/color_manager.dart';
 
 Future<void> mainCommon(Environment env) async {
   // Always call this if the main method is asynchronous
@@ -11,7 +12,7 @@ Future<void> mainCommon(Environment env) async {
   // Load the JSON config into memory
   await ConfigReader.initialize();
 
-  Color primaryColor;
+  MaterialColor primaryColor;
   // ignore: unused_local_variable
   bool enableLogging;
   // ignore: unused_local_variable
@@ -23,14 +24,15 @@ Future<void> mainCommon(Environment env) async {
 
   switch (env) {
     case Environment.dev:
-      primaryColor = Colors.blue;
+      primaryColor = ColorManager.createMaterialColor(Colors.blue);
       enableLogging = true;
       performanceOptimization = false;
       enableAnalytics = false;
       environmentName = 'Development';
       break;
     case Environment.prod:
-      primaryColor = Colors.red;
+      primaryColor = ColorManager.createMaterialColor(Colors.red);
+      enableLogging = true;
       enableLogging = false;
       performanceOptimization = true;
       enableAnalytics = true;
@@ -39,7 +41,7 @@ Future<void> mainCommon(Environment env) async {
   }
 
   runApp(
-    Provider.value(
+    Provider<MaterialColor>.value(
       value: primaryColor,
       child: UmeasApp(),
     ),

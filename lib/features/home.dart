@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
 
   void _incrementCounter() {
     setState(() {
-      _counter += 1;
+      _counter += ConfigReader.incrementAmount;
     });
   }
 

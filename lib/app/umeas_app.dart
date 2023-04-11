@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../features/home.dart';
+import '../features/home/presentation/pages/home_page.dart';
 
 // ignore: use_key_in_widget_constructors
 class UmeasApp extends StatelessWidget {

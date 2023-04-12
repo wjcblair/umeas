@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:umeas/core/usecases/params.dart';
 import 'package:umeas/features/splash/domain/entities/splash.dart';
 import 'package:umeas/features/splash/domain/repositories/splash_repository.dart';
 import 'package:umeas/features/splash/domain/usecases/get_splash.dart';
@@ -27,7 +28,8 @@ void main() {
           .thenAnswer((_) async => const Right(tSplash));
 
       // Act
-      final result = await usecase(imagePath: tImagePath);
+      final result =
+          await usecase(const Params(data: {'imagePath': tImagePath}));
 
       // Assert
       expect(result, const Right(tSplash));

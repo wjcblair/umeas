@@ -1,15 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:umeas/core/error/failures/failure.dart';
+import 'package:umeas/core/usecases/usecase.dart';
 
+import '../../../../core/usecases/params.dart';
 import '../entities/splash.dart';
 import '../repositories/splash_repository.dart';
 
-class GetSplash {
+class GetSplash implements UseCase<Splash, Params> {
   final ISplashRepository repository;
 
   GetSplash(this.repository);
 
-  Future<Either<Failure, Splash>> call({required String imagePath}) async {
-    return await repository.getSplash(imagePath);
+  @override
+  Future<Either<Failure, Splash>> call(Params params) async {
+    return await repository.getSplash(params.data['imagePath'] as String);
   }
 }

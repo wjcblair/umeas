@@ -22,7 +22,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   _goNext() {
-    Navigator.pushReplacementNamed(context, Routes.homeRoute);
+    Navigator.pushReplacementNamed(context, Routes.home);
   }
 
   @override

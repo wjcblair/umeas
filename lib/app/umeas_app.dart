@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../features/home/presentation/pages/home_page.dart';
+import '../core/routes/route_manager.dart';
 
 // ignore: use_key_in_widget_constructors
 class UmeasApp extends StatelessWidget {
@@ -12,10 +12,8 @@ class UmeasApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Provider.of<MaterialColor>(context),
       ),
-      home: const HomePage(
-        title: 'Flutter CI with Flavors!',
-        key: null,
-      ),
+      onGenerateRoute: RouteGenerator.getRoute,
+      initialRoute: Routes.splash,
     );
   }
 }

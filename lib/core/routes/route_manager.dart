@@ -4,21 +4,21 @@ import 'package:umeas/features/home/presentation/pages/home_page.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 
 class Routes {
-  static const String splashRoute = '/';
-  static const String homeRoute = '/home';
+  static const String splash = '/';
+  static const String home = '/home';
 }
 
 class RouteGenerator {
   static Route? getRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
-      case Routes.splashRoute:
+      case Routes.splash:
         return MaterialPageRoute(
           builder: (_) => const SplashPage(
             title: 'Splash Page',
             key: null,
           ),
         );
-      case Routes.homeRoute:
+      case Routes.home:
         return MaterialPageRoute(
           builder: (_) => const HomePage(
             title: 'Home View',

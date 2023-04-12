@@ -13,39 +13,6 @@
             ]
         },
         {
-            "name": "Flutter Dev Release",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release",
-            "program": "lib/main_dev.dart",
-            "args": [
-                "--flavor",
-                "dev"
-            ]
-        },
-        {
-            "name": "Flutter Profile",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile",
-            "program": "lib/main_dev.dart",
-            "args": [
-                "--flavor",
-                "dev"
-            ]
-        },
-        {
-            "name": "Flutter Test",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release",
-            "program": "lib/main_tst.dart",
-            "args": [
-                "--flavor",
-                "tst"
-            ]
-        },
-        {
             "name": "Flutter Prod",
             "request": "launch",
             "type": "dart",

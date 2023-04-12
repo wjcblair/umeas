@@ -27,7 +27,7 @@ void main() {
           .thenAnswer((_) async => const Right(tSplash));
 
       // Act
-      final result = await usecase.execute(imagePath: tImagePath);
+      final result = await usecase(imagePath: tImagePath);
 
       // Assert
       expect(result, const Right(tSplash));

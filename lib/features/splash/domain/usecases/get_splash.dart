@@ -9,7 +9,7 @@ class GetSplash {
 
   GetSplash(this.repository);
 
-  Future<Either<Failure, Splash>> execute({required String imagePath}) async {
+  Future<Either<Failure, Splash>> call({required String imagePath}) async {
     return await repository.getSplash(imagePath);
   }
 }

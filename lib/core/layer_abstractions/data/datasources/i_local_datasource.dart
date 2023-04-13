@@ -1,4 +1,4 @@
 abstract class ILocalDataSource<Model> {
-  Model getModel();
+  Future<Model> getModel();
   Future<void> cacheModel(Model model);
 }

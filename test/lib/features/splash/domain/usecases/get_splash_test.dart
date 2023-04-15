@@ -19,10 +19,13 @@ void main() {
 
   setUp(() {
     mockSplashRepository = MockSplashRepository();
-    usecase = GetSplash(mockSplashRepository);
+    usecase = GetSplash(repository: mockSplashRepository);
     tImagePath = SplashConstants.kLogo;
     tDelay = SplashConstants.kDelay;
-    tSplash = Splash(delay: tDelay, image: AssetImage(tImagePath));
+    tSplash = Splash(
+        delay: tDelay,
+        image: AssetImage(tImagePath),
+        nextRoute: SplashConstants.kNextRoute);
   });
 
   test(

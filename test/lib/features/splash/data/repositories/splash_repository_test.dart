@@ -5,12 +5,10 @@ import 'package:mocktail/mocktail.dart';
 import 'package:umeas/core/error/exceptions/cache_exception.dart';
 import 'package:umeas/core/error/failures/cache_failure.dart';
 import 'package:umeas/features/splash/constants/splash_constants.dart';
-import 'package:umeas/features/splash/data/datasources/i_splash_local_datasource.dart';
 import 'package:umeas/features/splash/data/models/splash_model.dart';
 import 'package:umeas/features/splash/data/repositories/splash_repository.dart';
 
-class MockSplashLocalDataSource extends Mock
-    implements ISplashLocalDataSource {}
+import '../datasources/splash_datasource_test.dart';
 
 void main() {
   late MockSplashLocalDataSource mockLocalDataSource;
@@ -19,12 +17,13 @@ void main() {
   setUpAll(() {
     registerFallbackValue(const SplashModel(
         delay: SplashConstants.kDelay,
-        image: AssetImage(SplashConstants.kLogo)));
+        image: AssetImage(SplashConstants.kLogo),
+        nextRoute: SplashConstants.kNextRoute));
   });
 
   setUp(() {
     mockLocalDataSource = MockSplashLocalDataSource();
-    mockRepository = SplashRepository(mockLocalDataSource);
+    mockRepository = SplashRepository(localDataSource: mockLocalDataSource);
     when(() => mockLocalDataSource.cacheModel(any()))
         // ignore: avoid_returning_null_for_void
         .thenAnswer((_) async => null);
@@ -33,7 +32,8 @@ void main() {
   group('getSplash', () {
     const SplashModel tSplashModel = SplashModel(
         delay: SplashConstants.kDelay,
-        image: AssetImage(SplashConstants.kLogo));
+        image: AssetImage(SplashConstants.kLogo),
+        nextRoute: SplashConstants.kNextRoute);
     const tSplash = tSplashModel;
 
     test(

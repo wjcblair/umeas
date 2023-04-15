@@ -1,54 +1,65 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/assets/image_assets.dart';
-import '../../../../core/colors/color_manager.dart';
 import '../../../../core/constants/screen_constants.dart';
-import '../../../../core/routes/route_manager.dart';
+import '../../../../injection_container.dart';
+import '../bloc/splash_bloc.dart';
+import '../bloc/splash_event.dart';
+import '../bloc/splash_state.dart';
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({super.key, required String title});
-
-  @override
-  State<StatefulWidget> createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
-  late Timer _timer;
-
-  _startDelay() {
-    _timer = Timer(const Duration(seconds: 2), _goNext);
-  }
-
-  _goNext() {
-    Navigator.pushReplacementNamed(context, Routes.home);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _startDelay();
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
+class SplashPage extends StatelessWidget {
+  const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorManager.white,
-      body: Center(
-        child: SizedBox(
-          width: ScreenConstants.instance.displayWidth(context) * 0.5,
-          height: ScreenConstants.instance.displayHeight(context) * 0.5,
-          child: const Image(
-            image: AssetImage(ImageAssets.kSplashLogo),
-          ),
-        ),
+    return buildBody(context);
+  }
+
+  BlocProvider<SplashBloc> buildBody(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        final splashBloc = sl<SplashBloc>();
+        splashBloc.add(InitializeSplash());
+        return splashBloc;
+      },
+      child: BlocConsumer<SplashBloc, SplashState>(
+        listener: (context, state) {
+          if (state is Loaded) {
+            Navigator.of(context).pushReplacementNamed(state.nextRoute);
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            body: Builder(
+              builder: (BuildContext innerContext) {
+                if (state is Loading) {
+                  return Center(
+                    child: SizedBox(
+                      width:
+                          ScreenConstants.instance.displayWidth(innerContext) *
+                              0.5,
+                      height:
+                          ScreenConstants.instance.displayHeight(innerContext) *
+                              0.5,
+                      child: Image(
+                        image: state.splashLogo,
+                      ),
+                    ),
+                  );
+                } else if (state is Error) {
+                  return Center(
+                    child: Text(
+                      state.message,
+                      style: const TextStyle(fontSize: 18, color: Colors.red),
+                    ),
+                  );
+                } else {
+                  return Container();
+                }
+              },
+            ),
+          );
+        },
       ),
     );
   }

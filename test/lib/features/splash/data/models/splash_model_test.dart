@@ -10,7 +10,8 @@ void main() {
   setUp(() {
     tSplashModel = const SplashModel(
         delay: SplashConstants.kDelay,
-        image: AssetImage(SplashConstants.kLogo));
+        image: AssetImage(SplashConstants.kLogo),
+        nextRoute: SplashConstants.kNextRoute);
   });
 
   test(

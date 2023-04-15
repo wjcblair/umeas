@@ -13,10 +13,7 @@ class RouteGenerator {
     switch (routeSettings.name) {
       case Routes.splash:
         return MaterialPageRoute(
-          builder: (_) => const SplashPage(
-            title: 'Splash Page',
-            key: null,
-          ),
+          builder: (_) => const SplashPage(),
         );
       case Routes.home:
         return MaterialPageRoute(

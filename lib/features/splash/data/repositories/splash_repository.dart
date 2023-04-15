@@ -10,17 +10,17 @@ import '../../../../core/error/failures/i_failure.dart';
 import '../../domain/repositories/i_splash_repository_contract.dart';
 
 class SplashRepository implements ISplashRepositoryContract {
-  final ISplashLocalDataSource _splashLocalDataSource;
+  final ISplashLocalDataSourceContract localDataSource;
 
-  SplashRepository(this._splashLocalDataSource);
+  SplashRepository({required this.localDataSource});
 
   @override
   Future<Either<IFailure, Splash>> getSplash() async {
     try {
       // Attempt to get model from assets
-      final splashModel = await _splashLocalDataSource.getModel();
+      final splashModel = await localDataSource.getModel();
       // Cache the model
-      await _splashLocalDataSource.cacheModel(splashModel);
+      await localDataSource.cacheModel(splashModel);
 
       return Right(splashModel);
     } on CacheException catch (e) {

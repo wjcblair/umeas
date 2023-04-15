@@ -1,7 +1,8 @@
 import '../../../../core/layer_abstractions/data/datasources/i_local_datasource.dart';
 import '../models/splash_model.dart';
 
-abstract class ISplashLocalDataSource implements ILocalDataSource<SplashModel> {
+abstract class ISplashLocalDataSourceContract
+    implements ILocalDataSource<SplashModel> {
   /// Gets the [SplashModel] object from the assets folder or cache.
   ///
   /// Throws [CacheException] if no cached data is present.

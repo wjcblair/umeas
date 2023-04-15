@@ -11,3 +11,5 @@ abstract class IFailure extends Equatable {
   @override
   String toString() => '$runtimeType Failure: $message';
 }
+
+const String kUnexpectedFailureMessage = 'Unexpected Failure';

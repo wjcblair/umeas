@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/constants/screen_constants.dart';
 import '../../../../injection_container.dart';
 import '../bloc/splash_bloc.dart';
 import '../bloc/splash_event.dart';
 import '../bloc/splash_state.dart';
+import '../widgets/splash_logo.dart';
+import '../widgets/error_text.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -33,26 +34,9 @@ class SplashPage extends StatelessWidget {
             body: Builder(
               builder: (BuildContext innerContext) {
                 if (state is Loading) {
-                  return Center(
-                    child: SizedBox(
-                      width:
-                          ScreenConstants.instance.displayWidth(innerContext) *
-                              0.5,
-                      height:
-                          ScreenConstants.instance.displayHeight(innerContext) *
-                              0.5,
-                      child: Image(
-                        image: state.splashLogo,
-                      ),
-                    ),
-                  );
+                  return SplashLogo(splashLogo: state.splashLogo);
                 } else if (state is Error) {
-                  return Center(
-                    child: Text(
-                      state.message,
-                      style: const TextStyle(fontSize: 18, color: Colors.red),
-                    ),
-                  );
+                  return ErrorText(message: state.message);
                 } else {
                   return Container();
                 }

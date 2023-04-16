@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:umeas/app/umeas_app.dart';
 
 import '../config/config_reader.dart';
 import '../env/environment.dart';
 import 'core/colors/color_manager.dart';
+import 'injection_container.dart' as di;
 
 Future<void> mainCommon(Environment env) async {
   // Always call this if the main method is asynchronous
@@ -12,6 +12,7 @@ Future<void> mainCommon(Environment env) async {
   // Load the JSON config into memory
   await ConfigReader.initialize();
 
+  // ignore: unused_local_variable
   MaterialColor primaryColor;
   // ignore: unused_local_variable
   bool enableLogging;
@@ -40,10 +41,8 @@ Future<void> mainCommon(Environment env) async {
       break;
   }
 
-  runApp(
-    Provider<MaterialColor>.value(
-      value: primaryColor,
-      child: UmeasApp(),
-    ),
-  );
+  // inject dependencies
+  await di.init();
+
+  runApp(UmeasApp());
 }

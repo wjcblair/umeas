@@ -1,7 +1,7 @@
-abstract class IException implements Exception {
+abstract class AppException implements Exception {
   final String message;
 
-  const IException({required this.message});
+  const AppException({required this.message});
 
   @override
   String toString() => '$runtimeType Exception: $message';

@@ -1,5 +1,5 @@
-import 'i_exception.dart';
+import 'app_exception.dart';
 
-class CacheException extends IException {
+class CacheException extends AppException {
   const CacheException({required String message}) : super(message: message);
 }

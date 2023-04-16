@@ -1,5 +1,5 @@
-import 'i_failure.dart';
+import 'app_failure.dart';
 
-class ServerFailure extends IFailure {
+class ServerFailure extends AppFailure {
   const ServerFailure({required String message}) : super(message: message);
 }

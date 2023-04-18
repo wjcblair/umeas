@@ -6,7 +6,7 @@ class AuthUserModel extends AuthUser {
   const AuthUserModel({
     required String id,
     required String email,
-    required String isEmailVerified,
+    required bool isEmailVerified,
   }) : super(
           id: id,
           email: email,
@@ -16,6 +16,6 @@ class AuthUserModel extends AuthUser {
   factory AuthUserModel.fromFirebase(User user) => AuthUserModel(
         id: user.uid,
         email: user.email!,
-        isEmailVerified: user.emailVerified.toString(),
+        isEmailVerified: user.emailVerified,
       );
 }

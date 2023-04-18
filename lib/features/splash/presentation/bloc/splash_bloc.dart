@@ -14,8 +14,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   Future<void> _onInitializeSplash(
       InitializeSplash event, Emitter<SplashState> emit) async {
-    final result = await getSplash(NoParams());
-    return result.fold(
+    final splashOrFailure = await getSplash(NoParams());
+    return splashOrFailure.fold(
       (failure) {
         emit(Error(message: failure.message));
       },

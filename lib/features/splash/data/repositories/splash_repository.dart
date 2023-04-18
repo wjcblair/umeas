@@ -1,4 +1,3 @@
-import 'package:umeas/features/splash/data/datasources/i_splash_local_datasource.dart';
 import 'package:umeas/features/splash/domain/entities/splash.dart';
 
 import 'package:dartz/dartz.dart';
@@ -8,6 +7,7 @@ import '../../../../core/error/failures/cache_failure.dart';
 import '../../../../core/error/failures/general_failure.dart';
 import '../../../../core/error/failures/app_failure.dart';
 import '../../domain/repositories/i_splash_repository_contract.dart';
+import '../datasources/local/i_splash_local_datasource_contract.dart';
 
 class SplashRepository implements ISplashRepositoryContract {
   final ISplashLocalDataSourceContract localDataSource;

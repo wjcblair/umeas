@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../core/routes/route_manager.dart';
 
@@ -13,6 +14,22 @@ class UmeasApp extends StatelessWidget {
       ),
       onGenerateRoute: RouteGenerator.getRoute,
       initialRoute: Routes.splash,
+      // locales supported by app
+      supportedLocales: AppLocalizations.supportedLocales,
+      // these delegates make sure the localization data for the proper language is loaded
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+
+      // returns a locale which will be used by the app
+      // for (var supportLocale in supportedLocales) {
+      //   if (supportedLocale.languageCode == locale.languageCode &&
+      //       supportedLocale.countryCode == locale.countryCode) {
+      //     return supportedLocale;
+      //   }
+      // }
+      // // if the locale of the device is not supported, use the first one
+      // // from the list (English, in this case).
+      // return supportedLocales.first;
+      // },
     );
   }
 }

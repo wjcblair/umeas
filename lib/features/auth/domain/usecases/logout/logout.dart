@@ -1,19 +1,18 @@
 import 'package:umeas/core/error/failures/app_failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:umeas/core/layer_abstractions/domain/usecases/noparams.dart';
 import 'package:umeas/core/layer_abstractions/domain/usecases/usecase.dart';
 import 'package:umeas/features/auth/domain/usecases/core/auth_user_params.dart';
 
-import '../../entities/auth_user.dart';
 import '../../repositories/i_auth_repository_contract.dart';
 
-class Login implements UseCase<AuthUser, AuthUserParams> {
+class Logout implements UseCase<void, NoParams> {
   final IAuthRepositoryContract repository;
 
-  Login({required this.repository});
+  Logout({required this.repository});
 
   @override
-  Future<Either<AppFailure, AuthUser>> call(AuthUserParams params) async {
-    return await repository.logIn(
-        email: params.email, password: params.password);
+  Future<Either<AppFailure, void>> call(NoParams params) async {
+    return await repository.logOut();
   }
 }

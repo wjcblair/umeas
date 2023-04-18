@@ -4,10 +4,10 @@ import 'package:umeas/features/auth/domain/usecases/core/auth_user_params.dart';
 
 import '../../../../../core/error/failures/app_failure.dart';
 import '../../entities/auth_user.dart';
-import '../../repositories/auth_provider.dart';
+import '../../repositories/i_auth_repository_contract.dart';
 
 class Register extends UseCase<AuthUser, AuthUserParams> {
-  final IAuthProviderContract repository;
+  final IAuthRepositoryContract repository;
 
   Register({required this.repository});
   @override

@@ -1,7 +1,7 @@
 import 'package:umeas/features/splash/constants/splash_constants.dart';
 import 'package:umeas/features/splash/data/models/splash_model.dart';
 
-import 'i_splash_local_datasource.dart';
+import 'i_splash_local_datasource_contract.dart';
 
 class SplashLocalDataSource implements ISplashLocalDataSourceContract {
   @override

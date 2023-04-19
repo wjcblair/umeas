@@ -1,14 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:umeas/app/umeas_app.dart';
 
 import '../config/config_reader.dart';
 import '../env/environment.dart';
 import 'core/colors/color_manager.dart';
+import 'firebase_options.dart';
 import 'injection_container.dart' as di;
 
 Future<void> mainCommon(Environment env) async {
   // Always call this if the main method is asynchronous
   WidgetsFlutterBinding.ensureInitialized();
+  // Initialize firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   // Load the JSON config into memory
   await ConfigReader.initialize();
 

@@ -9,7 +9,7 @@ class AuthSendEmailVerificationEvent extends AuthEvent {}
 class AuthLogInEvent extends AuthEvent {
   final String email;
   final String password;
-  AuthLogInEvent({required this.email, required this.password});
+  AuthLogInEvent(this.email, this.password);
 }
 
 class AuthLogInWithGoogleEvent extends AuthEvent {}
@@ -17,7 +17,7 @@ class AuthLogInWithGoogleEvent extends AuthEvent {}
 class AuthRegisterEvent extends AuthEvent {
   final String email;
   final String password;
-  AuthRegisterEvent({required this.email, required this.password});
+  AuthRegisterEvent(this.email, this.password);
 }
 
 class AuthShouldRegisterEvent extends AuthEvent {
@@ -25,8 +25,8 @@ class AuthShouldRegisterEvent extends AuthEvent {
 }
 
 class AuthForgotPasswordEvent extends AuthEvent {
-  final String email;
-  AuthForgotPasswordEvent({required this.email});
+  final String? email;
+  AuthForgotPasswordEvent({this.email});
 }
 
 class AuthLogOutEvent extends AuthEvent {

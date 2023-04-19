@@ -3,9 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:umeas/extensions/buildcontext/loc.dart';
 import 'package:umeas/features/auth/domain/failures/register_failures.dart';
 import 'package:umeas/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:umeas/features/auth/presentation/widgets/auth_text_button.dart';
+import 'package:umeas/features/auth/presentation/widgets/textfields/email_text_field.dart';
+import 'package:umeas/features/auth/presentation/widgets/textfields/password_text_field.dart';
 
 import '../../../../core/utilities/dialogs/error_dialog.dart';
 import '../../domain/failures/generic_failures.dart';
+import '../widgets/auth_padding.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -64,57 +68,33 @@ class _RegisterPageState extends State<RegisterPage> {
         appBar: AppBar(
           title: Text(context.loc.register),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
+        body: AuthPadding(
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(context.loc.register_view_prompt),
-                TextField(
+                EmailTextField(
                   controller: _email,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  autofocus: true,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    hintText: context.loc.email_text_field_placeholder,
-                  ),
+                  hintText: context.loc.email_text_field_placeholder,
                 ),
-                TextField(
+                PasswordTextField(
                   controller: _password,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  decoration: InputDecoration(
-                    hintText: context.loc.password_text_field_placeholder,
-                  ),
+                  hintText: context.loc.password_text_field_placeholder,
                 ),
                 Center(
                   child: Column(
                     children: [
-                      TextButton(
-                        onPressed: () async {
-                          context.read<AuthBloc>().add(
-                                AuthRegisterEvent(
-                                  email: _email.text,
-                                  password: _password.text,
-                                ),
-                              );
-                        },
-                        child: Text(
-                          context.loc.register,
+                      AuthTextButton(
+                        text: context.loc.register,
+                        event: AuthRegisterEvent(
+                          _email.text,
+                          _password.text,
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          context.read<AuthBloc>().add(
-                                AuthLogOutEvent(),
-                              );
-                        },
-                        child: Text(
-                          context.loc.register_view_already_registered,
-                        ),
+                      AuthTextButton(
+                        text: context.loc.register_view_already_registered,
+                        event: AuthLogOutEvent(),
                       ),
                     ],
                   ),

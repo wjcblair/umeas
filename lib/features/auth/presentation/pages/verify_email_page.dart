@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:umeas/extensions/buildcontext/loc.dart';
+import 'package:umeas/features/auth/presentation/widgets/auth_padding.dart';
+import 'package:umeas/features/auth/presentation/widgets/auth_text_button.dart';
 
 import '../bloc/auth_bloc.dart';
 
@@ -22,32 +23,19 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            AuthPadding(
               child: Text(
                 context.loc.verify_email_view_prompt,
               ),
             ),
-            TextButton(
-              onPressed: () {
-                context.read<AuthBloc>().add(
-                      AuthSendEmailVerificationEvent(),
-                    );
-              },
-              child: Text(
-                context.loc.verify_email_send_email_verification,
-              ),
+            AuthTextButton(
+              text: context.loc.verify_email_send_email_verification,
+              event: AuthSendEmailVerificationEvent(),
             ),
-            TextButton(
-              onPressed: () async {
-                context.read<AuthBloc>().add(
-                      AuthLogOutEvent(),
-                    );
-              },
-              child: Text(
-                context.loc.restart,
-              ),
-            )
+            AuthTextButton(
+              text: context.loc.restart,
+              event: AuthLogOutEvent(),
+            ),
           ],
         ),
       ),

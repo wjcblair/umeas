@@ -3,9 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:umeas/extensions/buildcontext/loc.dart';
 import 'package:umeas/features/auth/domain/failures/login_failures.dart';
 import 'package:umeas/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:umeas/features/auth/presentation/widgets/auth_padding.dart';
+import 'package:umeas/features/auth/presentation/widgets/auth_text_button.dart';
+import 'package:umeas/features/auth/presentation/widgets/textfields/email_text_field.dart';
+import 'package:umeas/features/auth/presentation/widgets/textfields/password_text_field.dart';
 
 import '../../../../core/utilities/dialogs/error_dialog.dart';
-import '../../../../injection_container.dart';
 import '../../domain/failures/generic_failures.dart';
 
 class LoginPage extends StatefulWidget {
@@ -56,70 +59,41 @@ class _LoginPageState extends State<LoginPage> {
       }
     }, builder: (context, child) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(context.loc.login),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Text(context.loc.login_view_prompt),
-                TextField(
-                  controller: _email,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
+          appBar: AppBar(
+            title: Text(context.loc.login),
+          ),
+          body: AuthPadding(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text(context.loc.login_view_prompt),
+                  EmailTextField(
+                    controller: _email,
                     hintText: context.loc.email_text_field_placeholder,
                   ),
-                ),
-                TextField(
-                  controller: _password,
-                  obscureText: true,
-                  enableSuggestions: false,
-                  autocorrect: false,
-                  decoration: InputDecoration(
+                  PasswordTextField(
+                    controller: _password,
                     hintText: context.loc.password_text_field_placeholder,
                   ),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    print("Login button pressed");
-                    context.read<AuthBloc>().add(
-                          AuthLogInEvent(
-                              email: _email.text, password: _password.text),
-                        );
-                  },
-                  child: Text(context.loc.login),
-                ),
-                TextButton(
-                  onPressed: () {
-                    print("Forgot password button pressed");
-                    context.read<AuthBloc>().add(
-                          AuthForgotPasswordEvent(email: _email.text),
-                        );
-                  },
-                  child: Text(
-                    context.loc.login_view_forgot_password,
+                  AuthTextButton(
+                    text: context.loc.login,
+                    event: AuthLogInEvent(
+                      _email.text,
+                      _password.text,
+                    ),
                   ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    print("Register button pressed");
-                    context.read<AuthBloc>().add(
-                          AuthShouldRegisterEvent(),
-                        );
-                  },
-                  child: Text(
-                    context.loc.login_view_not_registered_yet,
+                  AuthTextButton(
+                    text: context.loc.login_view_forgot_password,
+                    event: AuthForgotPasswordEvent(),
                   ),
-                )
-              ],
+                  AuthTextButton(
+                    text: context.loc.login_view_not_registered_yet,
+                    event: AuthShouldRegisterEvent(),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ),
-      );
+          ));
     });
   }
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:umeas/extensions/buildcontext/loc.dart';
+import 'package:umeas/features/auth/presentation/widgets/auth_padding.dart';
+import 'package:umeas/features/auth/presentation/widgets/auth_text_button.dart';
+import 'package:umeas/features/auth/presentation/widgets/textfields/auth_text_field.dart';
+import 'package:umeas/features/auth/presentation/widgets/textfields/email_text_field.dart';
 
 import '../../../../core/utilities/dialogs/error_dialog.dart';
 import '../../../../core/utilities/dialogs/reset_password_email_send_dialog.dart';
-import '../../../../injection_container.dart';
 import '../bloc/auth_bloc.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
@@ -49,52 +52,32 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       }
     }, builder: (context, child) {
       return Scaffold(
-        appBar: AppBar(
-          title: Text(context.loc.forgot_password),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Text(
-                  context.loc.forgot_password_view_prompt,
-                ),
-                TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  autocorrect: false,
-                  autofocus: true,
-                  controller: _controller,
-                  decoration: InputDecoration(
+          appBar: AppBar(
+            title: Text(context.loc.forgot_password),
+          ),
+          body: AuthPadding(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text(
+                    context.loc.forgot_password_view_prompt,
+                  ),
+                  EmailTextField(
+                    controller: _controller,
                     hintText: context.loc.email_text_field_placeholder,
                   ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    final email = _controller.text;
-                    context
-                        .read<AuthBloc>()
-                        .add(AuthForgotPasswordEvent(email: email));
-                  },
-                  child: Text(
-                    context.loc.forgot_password_view_send_me_link,
+                  AuthTextButton(
+                    text: context.loc.forgot_password_view_send_me_link,
+                    event: AuthForgotPasswordEvent(email: _controller.text),
                   ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    context.read<AuthBloc>().add(
-                          AuthLogOutEvent(),
-                        );
-                  },
-                  child: Text(
-                    context.loc.forgot_password_view_back_to_login,
+                  AuthTextButton(
+                    text: context.loc.forgot_password_view_back_to_login,
+                    event: AuthLogOutEvent(),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ),
-      );
+          ));
     });
   }
 }

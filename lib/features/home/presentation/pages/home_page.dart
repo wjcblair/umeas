@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../config/config_reader.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -31,8 +32,8 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text(
+              AppLocalizations.of(context)!.push_button_text,
             ),
             Text(
               '$_counter',

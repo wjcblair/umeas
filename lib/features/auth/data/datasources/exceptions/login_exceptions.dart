@@ -1,3 +1,8 @@
-class UserNotFoundAuthException implements Exception {}
+abstract class InvalidEmailAndPasswordCombinationException
+    implements Exception {}
 
-class WrongPasswordAuthException implements Exception {}
+class UserNotFoundAuthException
+    extends InvalidEmailAndPasswordCombinationException {}
+
+class WrongPasswordAuthException
+    extends InvalidEmailAndPasswordCombinationException {}

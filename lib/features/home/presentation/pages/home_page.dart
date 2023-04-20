@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:umeas/extensions/buildcontext/loc.dart';
 
 import '../../../../config/config_reader.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../../core/enums/menu_action.dart';
+import '../../../../core/presentation/widgets/dialogs/logout_dialog.dart';
+import '../../../auth/presentation/bloc/auth/auth_bloc.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -27,6 +33,30 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          PopupMenuButton<MenuAction>(
+            onSelected: (value) async {
+              switch (value) {
+                case MenuAction.logout:
+                  final shouldLogout = await showLogOutDialog(context);
+                  if (shouldLogout) {
+                    // ignore: use_build_context_synchronously
+                    context.read<AuthBloc>().add(
+                          AuthLogOutEvent(),
+                        );
+                  }
+              }
+            },
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem<MenuAction>(
+                  value: MenuAction.logout,
+                  child: Text(context.loc.logout_button),
+                ),
+              ];
+            },
+          )
+        ],
       ),
       body: Center(
         child: Column(

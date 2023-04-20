@@ -11,26 +11,40 @@ on:
         required: true
 
 jobs:
-  # harden_security:
-  #   name: Harden Security
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-
-  #     - name: Ensure SHA Pinned Actions
-  #       uses: zgosalvez/github-actions-ensure-sha-pinned-actions@v2.1.2
-
-
   setup:
-    name: Base workflow setup # to test branch status check # test 2
-    runs-on: macos-latest
+    name: Base workflow setup
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
         with:
-            fetch-depth: 0
-            token: ${{ secrets.PAT }}
+          token: ${{ secrets.PAT }}
+
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-pub-cache-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-cache-
+
+      - name: Restore packages
+        run: flutter pub get
+
+  analyze:
+    name: Analyze
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
 
       - name: Install and set Flutter version
         uses: subosito/flutter-action@v2
@@ -42,11 +56,29 @@ jobs:
       - name: Restore packages
         run: flutter pub get
 
-      - name: Analyze
+      - name: Run analysis
         run: flutter analyze
 
-      - name: Run tests
-        run: flutter test --coverage --flavor ${{inputs.flavor}}
+  test:
+    name: Run tests
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+          cache: true
+
+      - name: Restore packages
+        run: flutter pub get
+
+      - name: Run tests with coverage
+        run: flutter test --coverage --flavor ${{ inputs.flavor }}
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3

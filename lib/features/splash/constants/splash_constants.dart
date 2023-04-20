@@ -1,5 +1,5 @@
-import '../../../core/constants/assets/image_assets.dart';
-import '../../../core/routes/route_manager.dart';
+import '../../../core/assets/image_assets.dart';
+import '../../../core/presentation/routes/route_manager.dart';
 
 class SplashConstants {
   static const String kLogo = '${ImageAssets.kImagePath}/um_logo.png';

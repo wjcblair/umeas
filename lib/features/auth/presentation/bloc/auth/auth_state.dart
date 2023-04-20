@@ -1,6 +1,6 @@
 part of 'auth_bloc.dart';
 
-abstract class AuthState extends FeatureState {
+abstract class AuthState {
   final bool isLoading;
   final String? loadingText;
   const AuthState({
@@ -9,9 +9,11 @@ abstract class AuthState extends FeatureState {
   });
 }
 
-class AuthUninitializedState extends AuthState {
-  const AuthUninitializedState({required bool isLoading})
-      : super(isLoading: isLoading);
+class AuthInitialState extends AuthState {
+  const AuthInitialState({required bool isLoading})
+      : super(
+          isLoading: isLoading,
+        );
 }
 
 class AuthRegisteringState extends AuthState {
@@ -19,7 +21,9 @@ class AuthRegisteringState extends AuthState {
   const AuthRegisteringState({
     required this.failure,
     required isLoading,
-  }) : super(isLoading: isLoading);
+  }) : super(
+          isLoading: isLoading,
+        );
 }
 
 class AuthForgotPasswordState extends AuthState {
@@ -29,7 +33,9 @@ class AuthForgotPasswordState extends AuthState {
     required this.failure,
     required this.hasSentEmail,
     required bool isLoading,
-  }) : super(isLoading: isLoading);
+  }) : super(
+          isLoading: isLoading,
+        );
 }
 
 class AuthLoggedInState extends AuthState {
@@ -37,15 +43,19 @@ class AuthLoggedInState extends AuthState {
   const AuthLoggedInState({
     required this.user,
     required bool isLoading,
-  }) : super(isLoading: isLoading);
+  }) : super(
+          isLoading: isLoading,
+        );
 }
 
 class AuthNeedsVerificationState extends AuthState {
   const AuthNeedsVerificationState({required bool isLoading})
-      : super(isLoading: isLoading);
+      : super(
+          isLoading: isLoading,
+        );
 }
 
-class AuthLoggedOutState extends AuthState {
+class AuthLoggedOutState extends AuthState with EquatableMixin {
   final AppFailure? failure;
   const AuthLoggedOutState({
     required this.failure,
@@ -55,4 +65,7 @@ class AuthLoggedOutState extends AuthState {
           isLoading: isLoading,
           loadingText: loadingText,
         );
+
+  @override
+  List<Object?> get props => [failure, isLoading];
 }

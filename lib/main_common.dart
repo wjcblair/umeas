@@ -4,7 +4,7 @@ import 'package:umeas/app/umeas_app.dart';
 
 import '../config/config_reader.dart';
 import '../env/environment.dart';
-import 'core/colors/color_manager.dart';
+import 'core/presentation/colors/color_manager.dart';
 import 'firebase_options.dart';
 import 'injection_container.dart' as di;
 

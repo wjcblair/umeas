@@ -1,4 +1,4 @@
-import '../../../../../core/layer_abstractions/data/datasources/i_local_datasource.dart';
+import '../../../../../core/data/datasources/i_local_datasource.dart';
 import '../../models/splash_model.dart';
 
 abstract class ISplashLocalDataSourceContract

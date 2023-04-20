@@ -1,4 +1,4 @@
-import '../../../../../core/layer_abstractions/domain/usecases/params.dart';
+import '../../../../../core/domain/usecases/params.dart';
 
 class AuthUserParams extends Params {
   final String email;

@@ -1,4 +1,4 @@
-import 'package:umeas/core/error/failures/app_failure.dart';
+import '../../../../core/domain/failures/app_failure.dart';
 
 class InitializeAuthFailure extends AppFailure {
   const InitializeAuthFailure({message = 'Initialize Auth Failure'})

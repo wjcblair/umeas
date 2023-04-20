@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../core/routes/route_manager.dart';
+import '../core/presentation/routes/route_manager.dart';
 
 // ignore: use_key_in_widget_constructors
 class UmeasApp extends StatelessWidget {

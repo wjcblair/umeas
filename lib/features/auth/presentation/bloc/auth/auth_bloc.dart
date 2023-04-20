@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:umeas/core/error/failures/app_failure.dart';
-import 'package:umeas/core/layer_abstractions/presentation/bloc/feature_event.dart';
+import 'package:equatable/equatable.dart';
+import 'package:umeas/core/presentation/bloc/feature_event.dart';
 import 'package:umeas/features/auth/domain/usecases/get_current_user.dart/get_current_user.dart';
 import 'package:umeas/features/auth/domain/usecases/initialize/initialize.dart';
 import 'package:umeas/features/auth/domain/usecases/login/login.dart';
@@ -10,11 +10,11 @@ import 'package:umeas/features/auth/domain/usecases/password_reset/email_param.d
 import 'package:umeas/features/auth/domain/usecases/password_reset/reset_password.dart';
 import 'package:umeas/features/auth/domain/usecases/verify_email/verify_email.dart';
 
-import '../../../../core/layer_abstractions/domain/usecases/noparams.dart';
-import '../../../../core/layer_abstractions/presentation/bloc/feature_state.dart';
-import '../../domain/entities/auth_user.dart';
-import '../../domain/usecases/core/auth_user_params.dart';
-import '../../domain/usecases/register/register.dart';
+import '../../../../../core/domain/failures/app_failure.dart';
+import '../../../../../core/domain/usecases/noparams.dart';
+import '../../../domain/entities/auth_user.dart';
+import '../../../domain/usecases/core/auth_user_params.dart';
+import '../../../domain/usecases/register/register.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -38,26 +38,35 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this.resetPassword,
     required this.register,
     required this.verifyEmail,
-  }) : super(const AuthUninitializedState(isLoading: true)) {
+  }) : super(const AuthInitialState(isLoading: true)) {
     // Initialize
     on<AuthInitializeEvent>((event, emit) async {
       print("initializing event");
       final initializeOrFailure = await initialize(NoParams());
       await initializeOrFailure.fold(
         (failure) async {
-          emit(const AuthLoggedOutState(failure: null, isLoading: false));
+          emit(const AuthLoggedOutState(
+            failure: null,
+            isLoading: false,
+          ));
         },
         (initialize) async {
           final userOrFailure = await getCurrentUser(NoParams());
           userOrFailure.fold(
             (failure) {
-              emit(const AuthLoggedOutState(failure: null, isLoading: false));
+              emit(const AuthLoggedOutState(
+                failure: null,
+                isLoading: false,
+              ));
             },
             (user) {
-              if (user.isEmailVerified == false) {
+              if (!user.isEmailVerified) {
                 emit(const AuthNeedsVerificationState(isLoading: false));
               } else {
-                emit(AuthLoggedInState(user: user, isLoading: false));
+                emit(AuthLoggedInState(
+                  user: user,
+                  isLoading: false,
+                ));
               }
             },
           );
@@ -68,13 +77,36 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // Log in
     on<AuthLogInEvent>((event, emit) async {
       print('login event');
-      emit(const AuthLoggedOutState(isLoading: true, failure: null));
+      emit(const AuthLoggedOutState(
+        isLoading: true,
+        failure: null,
+        loadingText: 'Please wait while I log you in',
+      ));
       final authUserOrFailure = await login(
           AuthUserParams(email: event.email, password: event.password));
-      emit(authUserOrFailure.fold(
-        (failure) => AuthLoggedOutState(isLoading: false, failure: failure),
-        (authUser) => AuthLoggedInState(user: authUser, isLoading: false),
-      ));
+      authUserOrFailure.fold(
+          (failure) =>
+              emit(AuthLoggedOutState(isLoading: false, failure: failure)),
+          (authUser) {
+        if (!authUser.isEmailVerified) {
+          emit(
+            const AuthLoggedOutState(
+              failure: null,
+              isLoading: false,
+            ),
+          );
+          emit(const AuthNeedsVerificationState(isLoading: false));
+        } else {
+          emit(const AuthLoggedOutState(
+            failure: null,
+            isLoading: false,
+          ));
+          emit(AuthLoggedInState(
+            user: authUser,
+            isLoading: false,
+          ));
+        }
+      });
     });
 
     on<AuthLogInWithGoogleEvent>((event, emit) async {
@@ -109,17 +141,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // Should register
     on<AuthShouldRegisterEvent>((event, emit) async {
       print("should register event");
-      emit(const AuthRegisteringState(failure: null, isLoading: false));
+      emit(const AuthRegisteringState(
+        failure: null,
+        isLoading: false,
+      ));
     });
 
     // Register
     on<AuthRegisterEvent>((event, emit) async {
       print("register event");
-      emit(const AuthRegisteringState(isLoading: true, failure: null));
+      emit(const AuthRegisteringState(
+        isLoading: true,
+        failure: null,
+      ));
       final registerOrFailure = await register(
           AuthUserParams(email: event.email, password: event.password));
+      print("register or failure: $registerOrFailure");
       emit(registerOrFailure.fold(
-        (failure) => AuthRegisteringState(isLoading: false, failure: failure),
+        (failure) => AuthRegisteringState(
+          isLoading: false,
+          failure: failure,
+        ),
         (register) => const AuthNeedsVerificationState(isLoading: false),
       ));
     });
@@ -128,20 +170,32 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthForgotPasswordEvent>((event, emit) async {
       print("forgot password event");
       emit(const AuthForgotPasswordState(
-          isLoading: false, hasSentEmail: false, failure: null));
+        isLoading: false,
+        hasSentEmail: false,
+        failure: null,
+      ));
       final email = event.email;
       if (email == null) {
         return;
       }
       emit(const AuthForgotPasswordState(
-          isLoading: true, hasSentEmail: false, failure: null));
+        isLoading: true,
+        hasSentEmail: false,
+        failure: null,
+      ));
       final resetPasswordOrFailure =
           await resetPassword(EmailParam(email: email));
       emit(resetPasswordOrFailure.fold(
         (failure) => AuthForgotPasswordState(
-            isLoading: false, hasSentEmail: false, failure: failure),
+          isLoading: false,
+          hasSentEmail: false,
+          failure: failure,
+        ),
         (resetPassword) => const AuthForgotPasswordState(
-            isLoading: false, hasSentEmail: true, failure: null),
+          isLoading: false,
+          hasSentEmail: true,
+          failure: null,
+        ),
       ));
     });
 

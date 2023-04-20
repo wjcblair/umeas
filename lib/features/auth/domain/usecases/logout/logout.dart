@@ -1,9 +1,8 @@
-import 'package:umeas/core/error/failures/app_failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:umeas/core/layer_abstractions/domain/usecases/noparams.dart';
-import 'package:umeas/core/layer_abstractions/domain/usecases/usecase.dart';
-import 'package:umeas/features/auth/domain/usecases/core/auth_user_params.dart';
+import 'package:umeas/core/domain/usecases/noparams.dart';
+import 'package:umeas/core/domain/usecases/usecase.dart';
 
+import '../../../../../core/domain/failures/app_failure.dart';
 import '../../repositories/i_auth_repository_contract.dart';
 
 class Logout implements UseCase<void, NoParams> {

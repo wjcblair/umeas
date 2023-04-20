@@ -6,7 +6,7 @@ import 'package:umeas/features/auth/presentation/pages/register_page.dart';
 import 'package:umeas/features/auth/presentation/pages/verify_email_page.dart';
 import 'package:umeas/features/home/presentation/pages/home_page.dart';
 
-import '../../features/splash/presentation/pages/splash_page.dart';
+import '../../../features/splash/presentation/pages/splash_page.dart';
 
 class Routes {
   static const String splash = '/';

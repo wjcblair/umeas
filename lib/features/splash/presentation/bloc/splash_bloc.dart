@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/layer_abstractions/domain/usecases/noparams.dart';
+import '../../../../core/domain/usecases/noparams.dart';
 import '../../domain/usecases/get_splash.dart';
 import 'splash_event.dart';
 import 'splash_state.dart';

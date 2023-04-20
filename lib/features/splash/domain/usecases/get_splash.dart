@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:umeas/core/error/failures/app_failure.dart';
-import 'package:umeas/core/layer_abstractions/domain/usecases/usecase.dart';
+import 'package:umeas/core/domain/usecases/usecase.dart';
 
-import '../../../../core/layer_abstractions/domain/usecases/noparams.dart';
+import '../../../../core/domain/failures/app_failure.dart';
+import '../../../../core/domain/usecases/noparams.dart';
 import '../entities/splash.dart';
 import '../repositories/i_splash_repository_contract.dart';
 

@@ -1,6 +1,6 @@
 part of 'auth_bloc.dart';
 
-abstract class AuthEvent extends FeatureEvent {}
+abstract class AuthEvent {}
 
 class AuthInitializeEvent extends AuthEvent {}
 

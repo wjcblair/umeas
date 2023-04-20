@@ -13,9 +13,9 @@ import 'package:umeas/features/auth/domain/usecases/logout/logout.dart';
 import 'package:umeas/features/auth/domain/usecases/password_reset/reset_password.dart';
 import 'package:umeas/features/auth/domain/usecases/register/register.dart';
 import 'package:umeas/features/auth/domain/usecases/verify_email/verify_email.dart';
-import 'package:umeas/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:umeas/features/splash/domain/repositories/i_splash_repository_contract.dart';
 
+import 'features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'features/splash/data/datasources/local/i_splash_local_datasource_contract.dart';
 import 'features/splash/data/datasources/local/splash_local_datasource.dart';
 import 'features/splash/data/repositories/splash_repository.dart';

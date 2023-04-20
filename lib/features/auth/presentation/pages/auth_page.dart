@@ -6,9 +6,9 @@ import 'package:umeas/features/auth/presentation/pages/register_page.dart';
 import 'package:umeas/features/auth/presentation/pages/verify_email_page.dart';
 import 'package:umeas/features/home/presentation/pages/home_page.dart';
 
-import '../../../../core/helpers/loading/loading.dart';
+import '../../../../core/presentation/widgets/helpers/loading/loading.dart';
 import '../../../../injection_container.dart';
-import '../bloc/auth_bloc.dart';
+import '../bloc/auth/auth_bloc.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -24,6 +24,7 @@ class AuthPage extends StatelessWidget {
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state.isLoading) {
+            print("auth page recieved loading state");
             LoadingScreen().show(
               context: context,
               text: state.loadingText ?? 'Please wait a moment',
@@ -50,6 +51,7 @@ class AuthPage extends StatelessWidget {
             print("auth page recieved register state");
             return const RegisterPage();
           } else {
+            print("Cant find state for auth page");
             return const Scaffold(
               body: CircularProgressIndicator(),
             );

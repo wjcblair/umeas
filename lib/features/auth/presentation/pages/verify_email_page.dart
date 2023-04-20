@@ -3,7 +3,7 @@ import 'package:umeas/extensions/buildcontext/loc.dart';
 import 'package:umeas/features/auth/presentation/widgets/auth_padding.dart';
 import 'package:umeas/features/auth/presentation/widgets/auth_text_button.dart';
 
-import '../bloc/auth_bloc.dart';
+import '../bloc/auth/auth_bloc.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({Key? key}) : super(key: key);
@@ -31,10 +31,12 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
             AuthTextButton(
               text: context.loc.verify_email_send_email_verification,
               event: AuthSendEmailVerificationEvent(),
+              enabled: true,
             ),
             AuthTextButton(
               text: context.loc.restart,
               event: AuthLogOutEvent(),
+              enabled: true,
             ),
           ],
         ),

@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:umeas/extensions/buildcontext/loc.dart';
 import 'package:umeas/features/auth/presentation/widgets/auth_padding.dart';
 import 'package:umeas/features/auth/presentation/widgets/auth_text_button.dart';
-import 'package:umeas/features/auth/presentation/widgets/textfields/auth_text_field.dart';
 import 'package:umeas/features/auth/presentation/widgets/textfields/email_text_field.dart';
 
-import '../../../../core/utilities/dialogs/error_dialog.dart';
-import '../../../../core/utilities/dialogs/reset_password_email_send_dialog.dart';
-import '../bloc/auth_bloc.dart';
+import '../../../../core/presentation/widgets/dialogs/error_dialog.dart';
+import '../../../../core/presentation/widgets/dialogs/reset_password_email_send_dialog.dart';
+import '../bloc/auth/auth_bloc.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
@@ -20,9 +19,11 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   late final TextEditingController _controller;
+  late final ValueNotifier<bool> _emailValid;
 
   @override
   void initState() {
+    _emailValid = ValueNotifier<bool>(false);
     _controller = TextEditingController();
     super.initState();
   }
@@ -35,6 +36,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    // final authFormBloc = BlocProvider.of<AuthFormBloc>(context);
+    // final email = authFormBloc.state.email;
     return BlocConsumer<AuthBloc, AuthState>(listener: (context, state) async {
       if (state is AuthForgotPasswordState) {
         if (state.hasSentEmail) {
@@ -63,16 +66,24 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     context.loc.forgot_password_view_prompt,
                   ),
                   EmailTextField(
+                    context: context,
                     controller: _controller,
-                    hintText: context.loc.email_text_field_placeholder,
+                    isValid: _emailValid,
                   ),
-                  AuthTextButton(
-                    text: context.loc.forgot_password_view_send_me_link,
-                    event: AuthForgotPasswordEvent(email: _controller.text),
+                  ValueListenableBuilder(
+                    valueListenable: _emailValid,
+                    builder: (BuildContext context, emailValid, Widget? child) {
+                      return AuthTextButton(
+                        text: context.loc.forgot_password_view_send_me_link,
+                        event: AuthForgotPasswordEvent(email: _controller.text),
+                        enabled: emailValid,
+                      );
+                    },
                   ),
                   AuthTextButton(
                     text: context.loc.forgot_password_view_back_to_login,
                     event: AuthLogOutEvent(),
+                    enabled: true,
                   ),
                 ],
               ),

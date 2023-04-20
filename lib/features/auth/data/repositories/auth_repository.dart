@@ -2,14 +2,13 @@ import 'package:umeas/features/auth/data/datasources/exceptions/generic_exceptio
 import 'package:umeas/features/auth/data/datasources/remote/i_auth_remote_datasource.dart';
 import 'package:umeas/features/auth/domain/entities/auth_user.dart';
 
-import 'package:umeas/core/error/failures/app_failure.dart';
-
 import 'package:dartz/dartz.dart';
 import 'package:umeas/features/auth/domain/failures/generic_failures.dart';
 import 'package:umeas/features/auth/domain/failures/google_login_failures.dart';
 import 'package:umeas/features/auth/domain/failures/login_failures.dart';
 import 'package:umeas/features/auth/domain/failures/register_failures.dart';
 
+import '../../../../core/domain/failures/app_failure.dart';
 import '../../domain/repositories/i_auth_repository_contract.dart';
 import '../datasources/exceptions/google_login_exceptions.dart';
 import '../datasources/exceptions/login_exceptions.dart';
@@ -25,7 +24,7 @@ class AuthRepository implements IAuthRepositoryContract {
     try {
       return Right(remoteDatasource.getCurrentUser());
     } on UserNotLoggedInAuthException {
-      return const Left(UserNotFoundAuthFailure());
+      return Left(UserNotFoundAuthFailure());
     }
   }
 
@@ -44,8 +43,8 @@ class AuthRepository implements IAuthRepositoryContract {
     try {
       return Right(
           await remoteDatasource.logIn(email: email, password: password));
-    } on UserNotLoggedInAuthException {
-      return const Left(UserNotFoundAuthFailure());
+    } on InvalidEmailAndPasswordCombinationException {
+      return const Left(InvalidEmailAndPasswordCombinationFailure());
     } catch (_) {
       return const Left(GenericAuthFailure());
     }
@@ -56,6 +55,7 @@ class AuthRepository implements IAuthRepositoryContract {
     try {
       return Right(remoteDatasource.logOut());
     } on UserNotLoggedInAuthException {
+      print("User not logged in");
       return const Left(UserNotLoggedInAuthFailure());
     } catch (_) {
       return const Left(GenericAuthFailure());
@@ -86,6 +86,7 @@ class AuthRepository implements IAuthRepositoryContract {
     } on WeakPasswordAuthException {
       return const Left(WeakPasswordAuthFailure());
     } on EmailAlreadyInUseAuthException {
+      print("Email already in use exception");
       return const Left(EmailAlreadyInUseAuthFailure());
     } on InvalidEmailAuthException {
       return const Left(InvalidEmailAuthFailure());
@@ -111,7 +112,7 @@ class AuthRepository implements IAuthRepositoryContract {
     } on InvalidEmailAuthException {
       return const Left(InvalidEmailAuthFailure());
     } on UserNotFoundAuthException {
-      return const Left(UserNotFoundAuthFailure());
+      return Left(UserNotFoundAuthFailure());
     } catch (_) {
       return const Left(GenericAuthFailure());
     }

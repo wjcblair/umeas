@@ -1,4 +1,4 @@
-import 'package:umeas/core/error/failures/app_failure.dart';
+import '../../../../core/domain/failures/app_failure.dart';
 
 class GoogleSignInCancelledFailure extends AppFailure {
   const GoogleSignInCancelledFailure(

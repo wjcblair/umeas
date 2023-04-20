@@ -1,11 +1,13 @@
-import 'package:umeas/core/error/failures/app_failure.dart';
+import '../../../../core/domain/failures/app_failure.dart';
 
-class UserNotFoundAuthFailure extends AppFailure {
-  const UserNotFoundAuthFailure({message = 'User Not Found Auth Failure'})
+class InvalidEmailAndPasswordCombinationFailure extends AppFailure {
+  const InvalidEmailAndPasswordCombinationFailure(
+      {message = 'Invalid Email and Password Combination Failure'})
       : super(message: message);
 }
 
-class WrongPasswordAuthFailure extends AppFailure {
-  const WrongPasswordAuthFailure({message = 'Wrong Password Auth Failure'})
-      : super(message: message);
-}
+class UserNotFoundAuthFailure
+    extends InvalidEmailAndPasswordCombinationFailure {}
+
+class WrongPasswordAuthFailure
+    extends InvalidEmailAndPasswordCombinationFailure {}

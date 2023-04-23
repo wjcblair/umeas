@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:umeas/extensions/buildcontext/loc.dart';
+import 'package:umeas/core/extensions/buildcontext/loc.dart';
 import 'package:umeas/features/auth/presentation/widgets/auth_padding.dart';
+import 'package:umeas/features/auth/presentation/widgets/auth_page_layout.dart';
 import 'package:umeas/features/auth/presentation/widgets/auth_text_button.dart';
 import 'package:umeas/features/auth/presentation/widgets/textfields/email_text_field.dart';
 
+import '../../../../core/presentation/colors/color_manager.dart';
 import '../../../../core/presentation/widgets/dialogs/error_dialog.dart';
 import '../../../../core/presentation/widgets/dialogs/reset_password_email_send_dialog.dart';
 import '../bloc/auth/auth_bloc.dart';
@@ -30,6 +32,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   void dispose() {
+    _emailValid.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -54,41 +57,63 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         }
       }
     }, builder: (context, child) {
-      return Scaffold(
-          appBar: AppBar(
-            title: Text(context.loc.forgot_password),
-          ),
-          body: AuthPadding(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Text(
-                    context.loc.forgot_password_view_prompt,
+      return AuthPageLayout(
+        child: Column(
+          children: [
+            Text(
+              context.loc.forgot_password,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 45.0),
+            Text(
+              context.loc.login_view_prompt,
+            ),
+            EmailTextField(
+              controller: _controller,
+              isValid: _emailValid,
+            ),
+            ValueListenableBuilder(
+              valueListenable: _emailValid,
+              builder: (BuildContext context, emailValid, Widget? child) {
+                return ButtonTheme(
+                  minWidth: 88.0,
+                  height: 40.0,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: ColorManager.umGreen,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                      ),
+                    ),
+                    onPressed: emailValid
+                        ? () => context.read<AuthBloc>().add(
+                            AuthForgotPasswordEvent(email: _controller.text))
+                        : null,
+                    child: Text(context.loc.forgot_password_view_send_me_link),
                   ),
-                  EmailTextField(
-                    context: context,
-                    controller: _controller,
-                    isValid: _emailValid,
-                  ),
-                  ValueListenableBuilder(
-                    valueListenable: _emailValid,
-                    builder: (BuildContext context, emailValid, Widget? child) {
-                      return AuthTextButton(
-                        text: context.loc.forgot_password_view_send_me_link,
-                        event: AuthForgotPasswordEvent(email: _controller.text),
-                        enabled: emailValid,
-                      );
-                    },
-                  ),
-                  AuthTextButton(
-                    text: context.loc.forgot_password_view_back_to_login,
-                    event: AuthLogOutEvent(),
-                    enabled: true,
-                  ),
-                ],
+                );
+              },
+            ),
+            ButtonTheme(
+              minWidth: 88.0,
+              height: 40.0,
+              child: TextButton(
+                onPressed: () =>
+                    context.read<AuthBloc>().add(AuthLogOutEvent()),
+                child: Text(context.loc.forgot_password_view_back_to_login,
+                    style: const TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline),
+                    textAlign: TextAlign.center),
               ),
             ),
-          ));
+          ],
+        ),
+      );
     });
   }
 }

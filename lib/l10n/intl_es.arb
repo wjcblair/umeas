@@ -1,4 +1,3 @@
-
 {
     "push_button_text": "Has pulsado el botón tantas veces:",
 
@@ -27,7 +26,8 @@
     "login_view_prompt": "Por favor, inicia sesión en tu cuenta para interactuar y crear notas!",
     
     "login_view_forgot_password": "Olvidé mi contraseña",
-    "login_view_not_registered_yet": "¿No estás registrado aún? ¡Regístrate aquí!",
+    "login_view_dont_have_an_account": "¿No tienes una cuenta?",
+    "login_view_sign_up": "Inscribirse",
 
     "email_text_field_placeholder": "Ingresa tu correo electrónico aquí",
     "password_text_field_placeholder": "Ingresa tu contraseña aquí",
@@ -43,7 +43,8 @@
     "register_error_generic": "Error al registrarse. ¡Por favor, inténtalo de nuevo más tarde!",
     "register_error_invalid_email": "La dirección de correo electrónico que ingresaste parece ser inválida. ¡Por favor, intenta con otra dirección de correo electrónico!",
     "register_view_prompt": "¡Ingresa tu correo electrónico y contraseña para ver tus notas!",
-    "register_view_already_registered": "¿Ya estás registrado? ¡Inicia sesión aquí!",
+    "register_view_already_registered": "¿Ya registrado?",
+    "register_view_login_here": "¡Entre aquí!",
 
     "verify_email_view_prompt": "Te hemos enviado una verificación por correo electrónico. Ábrela para verificar tu cuenta. Si aún no has recibido un correo electrónico de verificación, ¡presiona el botón de abajo!",
     "verify_email_send_email_verification": "Enviar verificación por correo electrónico"

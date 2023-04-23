@@ -26,7 +26,8 @@
     "login_view_prompt": "Please log in to your account in order to interact with and create notes!",
     
     "login_view_forgot_password": "I forgot my password",
-    "login_view_not_registered_yet": "Not registered yet? Register here!",
+    "login_view_dont_have_an_account": "Dont have an account?",
+    "login_view_sign_up": "Sign up",
 
     "email_text_field_placeholder": "Enter your email here",
     "password_text_field_placeholder": "Enter your password here",
@@ -42,7 +43,8 @@
     "register_error_generic": "Failed to register. Please try again later!",
     "register_error_invalid_email": "The email address you entered appears to be invalid. Please try another email address!",
     "register_view_prompt": "Enter your email and password to see your notes!",
-    "register_view_already_registered": "Already registered? Login here!",
+    "register_view_already_registered": "Already registered?",
+    "register_view_login_here": "Login here!",
 
     "verify_email_view_prompt": "We've sent you an email verification. Please open it to verify your account. If you haven't received a verification email yet, press the button below!",
     "verify_email_send_email_verification": "Send email verification"

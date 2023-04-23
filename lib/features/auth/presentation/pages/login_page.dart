@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:umeas/core/presentation/colors/color_manager.dart';
 import 'package:umeas/core/presentation/widgets/helpers/two_value_listenable_builder.dart';
-import 'package:umeas/extensions/buildcontext/loc.dart';
+import 'package:umeas/core/extensions/buildcontext/loc.dart';
 import 'package:umeas/features/auth/domain/failures/login_failures.dart';
 import 'package:umeas/features/auth/presentation/widgets/auth_form.dart';
-import 'package:umeas/features/auth/presentation/widgets/auth_padding.dart';
-import 'package:umeas/features/auth/presentation/widgets/auth_text_button.dart';
+import 'package:umeas/features/auth/presentation/widgets/auth_page_layout.dart';
 
 import '../../../../core/presentation/widgets/dialogs/error_dialog.dart';
 import '../../domain/failures/generic_failures.dart';
@@ -69,50 +69,107 @@ class _LoginPageState extends State<LoginPage> {
         }
       },
       builder: (context, child) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(context.loc.login),
-          ),
-          body: AuthPadding(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Text(context.loc.login_view_prompt),
-                  AuthForm(
-                    emailController: _email,
-                    passwordController: _password,
-                    emailValid: _isEmailValid,
-                    passwordValid: _isPasswordValid,
-                  ),
-                  TwoValueListenableBuilder<bool, bool>(
-                    first: _isEmailValid,
-                    second: _isPasswordValid,
-                    child: Container(),
-                    builder: (context, emailValid, passwordValid, child) {
-                      final formValid = emailValid && passwordValid;
-                      return AuthTextButton(
-                        text: context.loc.login,
-                        event: AuthLogInEvent(
-                          _email.text,
-                          _password.text,
+        return AuthPageLayout(
+          child: Column(
+            children: [
+              Text(
+                context.loc.login,
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 17.0),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 45.0),
+              // Text(
+              //   context.loc.login_view_prompt,
+              // ),
+              AuthForm(
+                emailController: _email,
+                passwordController: _password,
+                emailValid: _isEmailValid,
+                passwordValid: _isPasswordValid,
+              ),
+              TwoValueListenableBuilder<bool, bool>(
+                first: _isEmailValid,
+                second: _isPasswordValid,
+                child: Container(),
+                builder: (context, emailValid, passwordValid, child) {
+                  final formValid = emailValid && passwordValid;
+                  return ButtonTheme(
+                    minWidth: 88.0,
+                    height: 40.0,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: ColorManager.umOrange,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
                         ),
-                        enabled: formValid,
-                      );
-                    },
-                  ),
-                  AuthTextButton(
-                    text: context.loc.login_view_forgot_password,
-                    event: AuthForgotPasswordEvent(),
-                    enabled: true,
-                  ),
-                  AuthTextButton(
-                    text: context.loc.login_view_not_registered_yet,
-                    event: AuthShouldRegisterEvent(),
-                    enabled: true,
+                      ),
+                      onPressed: formValid
+                          ? () => context.read<AuthBloc>().add(
+                                AuthLogInEvent(
+                                  _email.text,
+                                  _password.text,
+                                ),
+                              )
+                          : null,
+                      child: Text(context.loc.login),
+                    ),
+                  );
+                },
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ButtonTheme(
+                    minWidth: 88.0,
+                    height: 40.0,
+                    child: TextButton(
+                      onPressed: () => context
+                          .read<AuthBloc>()
+                          .add(AuthForgotPasswordEvent()),
+                      child: Text(
+                        context.loc.login_view_forgot_password,
+                        style: const TextStyle(
+                            fontSize: 14.0,
+                            decoration: TextDecoration.underline),
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ),
+              const SizedBox(height: 44.0),
+              Container(
+                padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 10.0),
+                child: Text(context.loc.login_view_dont_have_an_account,
+                    style: const TextStyle(fontSize: 14.0),
+                    textAlign: TextAlign.center),
+              ),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 720, minWidth: 200),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16, right: 24),
+                  child: ButtonTheme(
+                    minWidth: 88.0,
+                    height: 40.0,
+                    child: TextButton(
+                      onPressed: () => context
+                          .read<AuthBloc>()
+                          .add(AuthShouldRegisterEvent()),
+                      child: Text(context.loc.login_view_sign_up,
+                          style: const TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                            letterSpacing: 1,
+                          ),
+                          textAlign: TextAlign.center),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },

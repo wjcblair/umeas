@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umeas/features/auth/presentation/pages/auth_page.dart';
+import 'package:umeas/features/auth/presentation/pages/auth_master_page.dart';
 import 'package:umeas/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:umeas/features/auth/presentation/pages/login_page.dart';
 import 'package:umeas/features/auth/presentation/pages/register_page.dart';
@@ -34,7 +34,7 @@ class RouteGenerator {
         );
       case Routes.auth:
         return MaterialPageRoute(
-          builder: (_) => const AuthPage(
+          builder: (_) => const AuthMasterPage(
             key: null,
           ),
         );

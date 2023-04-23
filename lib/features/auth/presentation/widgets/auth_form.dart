@@ -29,13 +29,11 @@ class AuthForm extends StatelessWidget {
         child: Column(
           children: <Widget>[
             EmailTextField(
-              context: context,
               controller: emailController,
               isValid: emailValid,
             ),
             const SizedBox(height: 8),
             PasswordTextField(
-              context: context,
               controller: passwordController,
               isValid: passwordValid,
             ),

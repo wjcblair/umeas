@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:umeas/extensions/buildcontext/loc.dart';
+import 'package:umeas/core/extensions/buildcontext/loc.dart';
 
 import 'generic_dialog.dart';
 

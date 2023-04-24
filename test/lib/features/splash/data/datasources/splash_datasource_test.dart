@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:umeas/features/splash/constants/splash_constants.dart';
-import 'package:umeas/features/splash/data/datasources/i_splash_local_datasource.dart';
+import 'package:umeas/features/splash/data/datasources/local/i_splash_local_datasource_contract.dart';
 import 'package:umeas/features/splash/data/models/splash_model.dart';
 
 class MockSplashLocalDataSource extends Mock

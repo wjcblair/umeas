@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:umeas/core/layer_abstractions/domain/usecases/noparams.dart';
+import 'package:umeas/core/domain/usecases/noparams.dart';
 import 'package:umeas/features/splash/constants/splash_constants.dart';
 import 'package:umeas/features/splash/domain/entities/splash.dart';
 import 'package:umeas/features/splash/domain/repositories/i_splash_repository_contract.dart';

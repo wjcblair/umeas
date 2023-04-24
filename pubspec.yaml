@@ -9,38 +9,63 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   # Cool icons
   cupertino_icons: ^1.0.2
   provider: ^6.0.5
+
   # Firebase stuff
+  firebase_auth: ^4.4.1
   firebase_core: ^2.9.0
+  # Google Sign In
+  google_sign_in: ^6.1.0
+
   # Documentation
   dartdoc: ^6.2.1
+
   # Value equality
   equatable: ^2.0.5
+
   # Functional programming - either types
   dartz: ^0.10.1
-  # State management
+
+  # Bloc
+  bloc: ^8.1.1
   flutter_bloc: ^8.1.2
+  bloc_test: ^9.1.1
+
   # Dependency injection
   get_it: ^7.2.0
-  bloc_test: ^9.1.1
+
+  # Localization
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+  intl_utils: ^2.8.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   # Linting
   flutter_lints: ^2.0.0
+
   # Static code analysis
   dart_code_metrics: ^5.7.2
+
   # Mocking in tests
   mocktail: ^0.3.0
 
+
 flutter:
+
+  generate: true
+
   uses-material-design: true
 
   assets:
     - config/
+    - tokens/
     - assets/images/um_logo.png
     - assets/images/umeas_text_only.png
     - assets/images/umeas_verbose.png
+    - assets/images/umeas.png

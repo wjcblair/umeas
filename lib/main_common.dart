@@ -1,16 +1,25 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:umeas/app/umeas_app.dart';
 
 import '../config/config_reader.dart';
 import '../env/environment.dart';
-import 'core/colors/color_manager.dart';
+import 'config/design_tokens_reader.dart';
+import 'firebase_options.dart';
 import 'injection_container.dart' as di;
 
 Future<void> mainCommon(Environment env) async {
   // Always call this if the main method is asynchronous
   WidgetsFlutterBinding.ensureInitialized();
-  // Load the JSON config into memory
+  // Initialize firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  // Load the app config into memory
   await ConfigReader.initialize();
+
+  // Load the design tokens into memory
+  await DesignTokensReader.initialize();
 
   // ignore: unused_local_variable
   MaterialColor primaryColor;
@@ -25,14 +34,14 @@ Future<void> mainCommon(Environment env) async {
 
   switch (env) {
     case Environment.dev:
-      primaryColor = ColorManager.createMaterialColor(Colors.blue);
+      // primaryColor = ColorManager.createMaterialColor(Colors.blue);
       enableLogging = true;
       performanceOptimization = false;
       enableAnalytics = false;
       environmentName = 'Development';
       break;
     case Environment.prod:
-      primaryColor = ColorManager.createMaterialColor(Colors.red);
+      // primaryColor = ColorManager.createMaterialColor(Colors.red);
       enableLogging = true;
       enableLogging = false;
       performanceOptimization = true;

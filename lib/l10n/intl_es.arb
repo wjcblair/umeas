@@ -1,0 +1,51 @@
+{
+    "push_button_text": "Has pulsado el botón tantas veces:",
+
+    "logout_button": "Cerrar sesión",
+    "note": "Nota",
+    "cancel": "Cancelar",
+    "yes": "Sí",
+    "delete": "Eliminar",
+    "sharing": "Compartir",
+    "ok": "Aceptar",
+    "login": "UMEAS Página de inicio de sesión",
+    "verify_email": "Verificar correo electrónico",
+    "register": "Registrarse",
+    "restart": "Reiniciar",
+
+    "generic_error_prompt": "Ocurrió un error",
+    "logout_dialog_prompt": "¿Estás seguro de que quieres cerrar sesión?",
+
+    "password_reset": "Restablecimiento de contraseña",
+    "password_reset_dialog_prompt": "Te hemos enviado un enlace para restablecer la contraseña. Por favor, revisa tu correo electrónico para obtener más información.",
+
+    "login_error_cannot_find_user": "¡No se puede encontrar un usuario con las credenciales ingresadas!",
+    "login_error_wrong_credentials": "Credenciales incorrectas",
+    "login_error_auth_error": "Error de autenticación",
+
+    "login_view_prompt": "Por favor, inicia sesión en tu cuenta para interactuar y crear notas!",
+    
+    "login_view_forgot_password": "Olvidé mi contraseña",
+    "login_view_dont_have_an_account": "¿No tienes una cuenta?",
+    "login_view_sign_up": "Inscribirse",
+
+    "email_text_field_placeholder": "Ingresa tu correo electrónico aquí",
+    "password_text_field_placeholder": "Ingresa tu contraseña aquí",
+    
+    "forgot_password": "Contraseña olvidada",
+    "forgot_password_view_generic_error": "No pudimos procesar tu solicitud. Por favor, asegúrate de ser un usuario registrado, o si no, registra un usuario ahora volviendo un paso atrás.",
+    "forgot_password_view_prompt": "Si olvidaste tu contraseña, simplemente ingresa tu correo electrónico y te enviaremos un enlace para restablecerla.",
+    "forgot_password_view_send_me_link": "Enviarme enlace para restablecer contraseña",
+    "forgot_password_view_back_to_login": "Volver a la página de inicio de sesión",
+
+    "register_error_weak_password": "Esta contraseña no es lo suficientemente segura. ¡Por favor, elige otra contraseña!",
+    "register_error_email_already_in_use": "Este correo electrónico ya está registrado para otro usuario. ¡Por favor, elige otro correo electrónico!",
+    "register_error_generic": "Error al registrarse. ¡Por favor, inténtalo de nuevo más tarde!",
+    "register_error_invalid_email": "La dirección de correo electrónico que ingresaste parece ser inválida. ¡Por favor, intenta con otra dirección de correo electrónico!",
+    "register_view_prompt": "¡Ingresa tu correo electrónico y contraseña para ver tus notas!",
+    "register_view_already_registered": "¿Ya registrado?",
+    "register_view_login_here": "¡Entre aquí!",
+
+    "verify_email_view_prompt": "Te hemos enviado una verificación por correo electrónico. Ábrela para verificar tu cuenta. Si aún no has recibido un correo electrónico de verificación, ¡presiona el botón de abajo!",
+    "verify_email_send_email_verification": "Enviar verificación por correo electrónico"
+}

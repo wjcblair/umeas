@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/presentation/colors/app_colors.dart';
 import 'auth_text_field.dart';
 
 class PasswordTextField extends StatefulWidget {
@@ -35,18 +36,43 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
       controller: widget.controller,
       keyboardType: TextInputType.visiblePassword,
       decoration: InputDecoration(
+        fillColor: AppColors.white,
+        contentPadding: const EdgeInsets.all(12),
+        enabledBorder: const UnderlineInputBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10.0),
+            topRight: Radius.circular(10.0),
+          ),
+          borderSide: BorderSide(
+            //color: Colors.black,
+            width: 2.0,
+            style: BorderStyle.solid,
+          ),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(4.0),
+            topRight: Radius.circular(4.0),
+          ),
+          borderSide: BorderSide(
+            //color: Colors.blue,
+            width: 2.0,
+            style: BorderStyle.solid,
+          ),
+        ),
         filled: true,
-        fillColor: Colors.white,
-        border: const OutlineInputBorder(),
-        hintText: 'Password',
-        prefixIcon: const Icon(Icons.lock),
-        labelStyle: const TextStyle(fontSize: 13.0),
+        hintText: 'Your password',
+        prefixIcon: Icon(
+          Icons.lock,
+          color: AppColors.surfaceVariant,
+        ),
         suffixIcon: IconButton(
           icon: Icon(
             _obscureText ? Icons.visibility : Icons.visibility_off,
           ),
           onPressed: _togglePasswordVisibility,
         ),
+        //labelStyle: TextStyle(fontSize: 13.0),
       ),
       obscureText: _obscureText,
       enableSuggestions: false,

@@ -6,7 +6,7 @@ import 'package:umeas/features/auth/presentation/widgets/auth_page_layout.dart';
 import 'package:umeas/features/auth/presentation/widgets/auth_text_button.dart';
 import 'package:umeas/features/auth/presentation/widgets/textfields/email_text_field.dart';
 
-import '../../../../core/presentation/colors/color_manager.dart';
+import '../../../../core/presentation/colors/app_colors.dart';
 import '../../../../core/presentation/widgets/dialogs/error_dialog.dart';
 import '../../../../core/presentation/widgets/dialogs/reset_password_email_send_dialog.dart';
 import '../bloc/auth/auth_bloc.dart';
@@ -82,8 +82,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   height: 40.0,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: ColorManager.umGreen,
+                      // foregroundColor: Colors.white,
+                      // backgroundColor: ColorManager.umGreen,
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),

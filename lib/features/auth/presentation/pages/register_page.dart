@@ -5,7 +5,7 @@ import 'package:umeas/features/auth/domain/failures/register_failures.dart';
 import 'package:umeas/features/auth/presentation/widgets/auth_form.dart';
 import 'package:umeas/features/auth/presentation/widgets/auth_page_layout.dart';
 
-import '../../../../core/presentation/colors/color_manager.dart';
+import '../../../../core/presentation/colors/app_colors.dart';
 import '../../../../core/presentation/widgets/dialogs/error_dialog.dart';
 import '../../../../core/presentation/widgets/helpers/two_value_listenable_builder.dart';
 import '../../domain/failures/generic_failures.dart';
@@ -111,8 +111,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         height: 40.0,
                         child: TextButton(
                           style: TextButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            backgroundColor: ColorManager.umGreen,
+                            //foregroundColor: Colors.white,
+                            //backgroundColor: ColorManager.umGreen,
                             shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(5)),

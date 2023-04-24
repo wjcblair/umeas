@@ -24,7 +24,7 @@ class AuthMasterPage extends StatelessWidget {
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state.isLoading) {
-            print("auth page recieved loading state");
+            // print("auth page recieved loading state");
             LoadingScreen().show(
               context: context,
               text: state.loadingText ?? 'Please wait a moment',
@@ -39,19 +39,19 @@ class AuthMasterPage extends StatelessWidget {
               title: 'Home Page',
             );
           } else if (state is AuthNeedsVerificationState) {
-            print("auth page recieved verify email state");
+            // print("auth page recieved verify email state");
             return const VerifyEmailPage();
           } else if (state is AuthLoggedOutState) {
-            print("auth page recieved logged out state");
+            // print("auth page recieved logged out state");
             return const LoginPage();
           } else if (state is AuthForgotPasswordState) {
-            print("auth page recieved forgot password state");
+            // print("auth page recieved forgot password state");
             return const ForgotPasswordPage();
           } else if (state is AuthRegisteringState) {
-            print("auth page recieved register state");
+            // print("auth page recieved register state");
             return const RegisterPage();
           } else {
-            print("Cant find state for auth page");
+            // print("Cant find state for auth page");
             return const Scaffold(
               body: CircularProgressIndicator(),
             );

@@ -52,6 +52,7 @@ class FirebaseAuthDatasource implements IAuthRemoteDatasourceContract {
         password: password,
       );
       final user = getCurrentUser();
+      // ignore: unnecessary_null_comparison
       if (user != null) {
         return user;
       } else {
@@ -111,6 +112,7 @@ class FirebaseAuthDatasource implements IAuthRemoteDatasourceContract {
         password: password,
       );
       final user = getCurrentUser();
+      // ignore: unnecessary_null_comparison
       if (user != null) {
         return user;
       } else {
@@ -135,7 +137,7 @@ class FirebaseAuthDatasource implements IAuthRemoteDatasourceContract {
   Future<void> sendEmailVerification() async {
     final user = firebaseAuth.currentUser;
     if (user != null) {
-      print("sending email verification");
+      // print("sending email verification");
       return await user.sendEmailVerification();
     } else {
       throw UserNotLoggedInAuthException();

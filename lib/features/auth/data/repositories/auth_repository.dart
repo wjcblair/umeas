@@ -55,7 +55,7 @@ class AuthRepository implements IAuthRepositoryContract {
     try {
       return Right(remoteDatasource.logOut());
     } on UserNotLoggedInAuthException {
-      print("User not logged in");
+      // print("User not logged in");
       return const Left(UserNotLoggedInAuthFailure());
     } catch (_) {
       return const Left(GenericAuthFailure());
@@ -86,7 +86,7 @@ class AuthRepository implements IAuthRepositoryContract {
     } on WeakPasswordAuthException {
       return const Left(WeakPasswordAuthFailure());
     } on EmailAlreadyInUseAuthException {
-      print("Email already in use exception");
+      // print("Email already in use exception");
       return const Left(EmailAlreadyInUseAuthFailure());
     } on InvalidEmailAuthException {
       return const Left(InvalidEmailAuthFailure());

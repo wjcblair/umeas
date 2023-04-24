@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -43,7 +42,7 @@ class DesignTokensReader {
     sysTextStylesJson.forEach((key, val) {
       final textstyleReferencePath = val['value'] as String;
       final refTextStyle = extractReferenceKey(textstyleReferencePath);
-      print(refTextStyle);
+      // print(refTextStyle);
       final referenceTextStyleValue = _tokens!['umeas']['md']['ref']
           ['typescale'][refTextStyle]['value'] as Map<String, dynamic>;
       sysTextStyles[key] =

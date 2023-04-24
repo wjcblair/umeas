@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:umeas/core/assets/image_assets.dart';
 import 'package:umeas/core/presentation/colors/app_colors.dart';
 
 class AuthPageLayout extends StatelessWidget {

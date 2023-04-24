@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/presentation/colors/app_colors.dart';
-import 'auth_text_field.dart';
 
 class PasswordTextField extends StatefulWidget {
   final TextEditingController controller;
@@ -14,6 +13,7 @@ class PasswordTextField extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _PasswordTextFieldState createState() => _PasswordTextFieldState();
 }
 
@@ -96,7 +96,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
 
   static bool isPasswordValid(String? password) {
     if (password == null) return false;
-    // TODO: Add some advanced password checks (uppercase/lowercase, at least 1 number, ...)
+    // TODo: Add some advanced password checks (uppercase/lowercase, at least 1 number, ...)
     return password.length >= 6;
   }
 }

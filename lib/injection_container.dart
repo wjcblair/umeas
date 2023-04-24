@@ -25,7 +25,7 @@ import 'features/splash/presentation/bloc/splash_bloc.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  print('Initializing dependencies');
+  //print('Initializing dependencies');
   initFeatures();
   initCore();
   initExternal();
@@ -33,14 +33,14 @@ Future<void> init() async {
 
 // Features
 void initFeatures() {
-  print('Initializing feature dependencies');
+  //print('Initializing feature dependencies');
   initSplash();
   initAuth();
 }
 
 // Splash feature
 initSplash() {
-  print('Initializing Splash feature dependencies');
+  //print('Initializing Splash feature dependencies');
   // Blocs
   sl.registerFactory(() => SplashBloc(getSplash: sl()));
 
@@ -58,7 +58,7 @@ initSplash() {
 
 // Auth feature
 initAuth() {
-  print('Initializing Auth feature dependencies');
+  //print('Initializing Auth feature dependencies');
   // Blocs
   sl.registerFactory(() => AuthBloc(
       initialize: sl(),
@@ -91,12 +91,12 @@ initAuth() {
 
 // Core
 void initCore() {
-  print('Initializing core dependencies');
+  //print('Initializing core dependencies');
 }
 
 // External
 void initExternal() {
-  print('Initializing external dependencies');
+  //print('Initializing external dependencies');
   // Firebase
   sl.registerLazySingleton<FirebaseAuth>(() => FirebaseAuth.instance);
   sl.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn());

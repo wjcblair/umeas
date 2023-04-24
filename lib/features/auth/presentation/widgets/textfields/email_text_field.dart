@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:umeas/core/presentation/colors/app_colors.dart';
 
-import 'auth_text_field.dart';
-
 class EmailTextField extends StatelessWidget {
   final TextEditingController controller;
   final ValueNotifier<bool> isValid;

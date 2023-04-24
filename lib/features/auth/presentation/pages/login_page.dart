@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:umeas/core/presentation/colors/app_colors.dart';
 import 'package:umeas/core/presentation/styles/app_text_styles.dart';
 import 'package:umeas/core/presentation/widgets/helpers/two_value_listenable_builder.dart';
 import 'package:umeas/core/extensions/buildcontext/loc.dart';
@@ -49,19 +48,19 @@ class _LoginPageState extends State<LoginPage> {
       listener: (context, state) async {
         if (state is AuthLoggedOutState) {
           if (state.failure is UserNotFoundAuthFailure) {
-            print("User not found dialog");
+            //print("User not found dialog");
             await showErrorDialog(
               context,
               context.loc.login_error_cannot_find_user,
             );
           } else if (state.failure is WrongPasswordAuthFailure) {
-            print("Wrong password dialog");
+            //print("Wrong password dialog");
             await showErrorDialog(
               context,
               context.loc.login_error_wrong_credentials,
             );
           } else if (state.failure is GenericAuthFailure) {
-            print("Generic auth failure dialog");
+            //print("Generic auth failure dialog");
             await showErrorDialog(
               context,
               context.loc.login_error_auth_error,

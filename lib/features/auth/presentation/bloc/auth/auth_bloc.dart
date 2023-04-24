@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:umeas/core/presentation/bloc/feature_event.dart';
 import 'package:umeas/features/auth/domain/usecases/get_current_user.dart/get_current_user.dart';
 import 'package:umeas/features/auth/domain/usecases/initialize/initialize.dart';
 import 'package:umeas/features/auth/domain/usecases/login/login.dart';
@@ -41,7 +40,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }) : super(const AuthInitialState(isLoading: true)) {
     // Initialize
     on<AuthInitializeEvent>((event, emit) async {
-      print("initializing event");
+      // print("initializing event");
       final initializeOrFailure = await initialize(NoParams());
       await initializeOrFailure.fold(
         (failure) async {
@@ -76,7 +75,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     // Log in
     on<AuthLogInEvent>((event, emit) async {
-      print('login event');
+      // print('login event');
       emit(const AuthLoggedOutState(
         isLoading: true,
         failure: null,
@@ -110,7 +109,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
 
     on<AuthLogInWithGoogleEvent>((event, emit) async {
-      print('login with google event');
+      // print('login with google event');
       final logInWithGoogleOrFailure = await loginWithGoogle(NoParams());
       return logInWithGoogleOrFailure.fold(
         (failure) {
@@ -124,7 +123,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     // Log out
     on<AuthLogOutEvent>((event, emit) async {
-      print("received logout event");
+      // print("received logout event");
       final logOutOrFailure = await logout(NoParams());
       emit(logOutOrFailure.fold(
         (failure) => AuthLoggedOutState(
@@ -140,7 +139,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     // Should register
     on<AuthShouldRegisterEvent>((event, emit) async {
-      print("should register event");
+      // print("should register event");
       emit(const AuthRegisteringState(
         failure: null,
         isLoading: false,
@@ -149,14 +148,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     // Register
     on<AuthRegisterEvent>((event, emit) async {
-      print("register event");
+      // print("register event");
       emit(const AuthRegisteringState(
         isLoading: true,
         failure: null,
       ));
       final registerOrFailure = await register(
           AuthUserParams(email: event.email, password: event.password));
-      print("register or failure: $registerOrFailure");
+      // print("register or failure: $registerOrFailure");
       emit(registerOrFailure.fold(
         (failure) => AuthRegisteringState(
           isLoading: false,
@@ -168,7 +167,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     // Forgot password
     on<AuthForgotPasswordEvent>((event, emit) async {
-      print("forgot password event");
+      // print("forgot password event");
       emit(const AuthForgotPasswordState(
         isLoading: false,
         hasSentEmail: false,
@@ -201,7 +200,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     // Send email verification
     on<AuthSendEmailVerificationEvent>((event, emit) async {
-      print("send email verification event");
+      // print("send email verification event");
       final verifyEmailorFailure = await verifyEmail(NoParams());
       emit(verifyEmailorFailure.fold(
         (failure) => state, // Re-emit the current state

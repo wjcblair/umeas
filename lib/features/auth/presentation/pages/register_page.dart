@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:umeas/core/extensions/buildcontext/loc.dart';
-import 'package:umeas/features/auth/domain/failures/register_failures.dart';
-import 'package:umeas/features/auth/presentation/widgets/auth_form.dart';
-import 'package:umeas/features/auth/presentation/widgets/auth_page_layout.dart';
+import '../../../../core/extensions/buildcontext/loc.dart';
+import '../../domain/failures/register_failures.dart';
+import '../widgets/auth_form.dart';
+import '../widgets/auth_page_layout.dart';
 
-import '../../../../core/presentation/colors/app_colors.dart';
 import '../../../../core/presentation/widgets/dialogs/error_dialog.dart';
 import '../../../../core/presentation/widgets/helpers/two_value_listenable_builder.dart';
 import '../../domain/failures/generic_failures.dart';
 import '../bloc/auth/auth_bloc.dart';
-import '../widgets/auth_padding.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -47,29 +45,29 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(listener: (context, state) async {
-      print("State in listener: $state");
+      //print("State in listener: $state");
       if (state is AuthRegisteringState) {
-        print("Registering");
+        //print("Registering");
         if (state.failure is WeakPasswordAuthFailure) {
-          print("Weak password dialog");
+          //print("Weak password dialog");
           await showErrorDialog(
             context,
             context.loc.register_error_weak_password,
           );
         } else if (state.failure is EmailAlreadyInUseAuthFailure) {
-          print("Email already in use dialog");
+          //print("Email already in use dialog");
           await showErrorDialog(
             context,
             context.loc.register_error_email_already_in_use,
           );
         } else if (state.failure is GenericAuthFailure) {
-          print("Generic error dialog");
+          //print("Generic error dialog");
           await showErrorDialog(
             context,
             context.loc.register_error_generic,
           );
         } else if (state.failure is InvalidEmailAuthFailure) {
-          print("Invalid email dialog");
+          //print("Invalid email dialog");
           await showErrorDialog(
             context,
             context.loc.register_error_invalid_email,
@@ -77,7 +75,7 @@ class _RegisterPageState extends State<RegisterPage> {
         }
       }
     }, builder: (context, state) {
-      print("State in builder: $state");
+      //print("State in builder: $state");
       return AuthPageLayout(
         child: Column(
           children: [

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:umeas/core/extensions/buildcontext/loc.dart';
-import 'package:umeas/features/auth/presentation/widgets/auth_padding.dart';
 import 'package:umeas/features/auth/presentation/widgets/auth_page_layout.dart';
-import 'package:umeas/features/auth/presentation/widgets/auth_text_button.dart';
 import 'package:umeas/features/auth/presentation/widgets/textfields/email_text_field.dart';
 
-import '../../../../core/presentation/colors/app_colors.dart';
 import '../../../../core/presentation/widgets/dialogs/error_dialog.dart';
 import '../../../../core/presentation/widgets/dialogs/reset_password_email_send_dialog.dart';
 import '../bloc/auth/auth_bloc.dart';

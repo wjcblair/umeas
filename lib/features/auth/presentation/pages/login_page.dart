@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:umeas/core/presentation/colors/color_manager.dart';
+import 'package:umeas/core/presentation/colors/app_colors.dart';
+import 'package:umeas/core/presentation/styles/app_text_styles.dart';
 import 'package:umeas/core/presentation/widgets/helpers/two_value_listenable_builder.dart';
 import 'package:umeas/core/extensions/buildcontext/loc.dart';
 import 'package:umeas/features/auth/domain/failures/login_failures.dart';
@@ -74,9 +75,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Text(
                 context.loc.login,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 17.0),
-                textAlign: TextAlign.center,
+                style: AppTextStyles.headline5,
               ),
               const SizedBox(height: 45.0),
               // Text(
@@ -97,14 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                   return ButtonTheme(
                     minWidth: 88.0,
                     height: 40.0,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: ColorManager.umOrange,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                        ),
-                      ),
+                    child: ElevatedButton(
                       onPressed: formValid
                           ? () => context.read<AuthBloc>().add(
                                 AuthLogInEvent(

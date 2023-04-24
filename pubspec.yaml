@@ -64,6 +64,8 @@ flutter:
 
   assets:
     - config/
+    - tokens/
     - assets/images/um_logo.png
     - assets/images/umeas_text_only.png
     - assets/images/umeas_verbose.png
+    - assets/images/umeas.png

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:umeas/core/presentation/themes/app_themes.dart';
 
 import '../core/presentation/routes/route_manager.dart';
 
@@ -9,9 +10,7 @@ class UmeasApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter CI with Codemagic',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppTheme.lightTheme,
       onGenerateRoute: RouteGenerator.getRoute,
       initialRoute: Routes.splash,
       // locales supported by app

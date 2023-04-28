@@ -1,15 +1,14 @@
 import 'package:equatable/equatable.dart';
 
 abstract class AppFailure extends Equatable {
-  final String message;
-
-  const AppFailure({required this.message});
+  @override
+  List<Object> get props => [];
 
   @override
-  List<Object> get props => [message];
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AppFailure && runtimeType == other.runtimeType;
 
   @override
-  String toString() => '$runtimeType Failure: $message';
+  int get hashCode => runtimeType.hashCode;
 }
-
-const String kUnexpectedFailureMessage = 'Unexpected Failure';

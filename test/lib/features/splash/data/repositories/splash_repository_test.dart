@@ -72,18 +72,14 @@ void main() {
       'should return cache failure when the call to local datasource is unsuccessful',
       () async {
         // Arrange
-        when(() => mockLocalDataSource.getModel())
-            .thenThrow(const CacheException(message: "test"));
+        when(() => mockLocalDataSource.getModel()).thenThrow(CacheException());
 
         // Act
         final result = await mockRepository.getSplash();
 
         // Assert
         verify(() => mockLocalDataSource.getModel());
-        expect(
-            result,
-            const Left(
-                CacheFailure(message: "CacheException Exception: test")));
+        expect(result, Left(CacheFailure()));
       },
     );
   });

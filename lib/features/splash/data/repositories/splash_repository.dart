@@ -24,9 +24,9 @@ class SplashRepository implements ISplashRepositoryContract {
 
       return Right(splashModel);
     } on CacheException catch (e) {
-      return Left(CacheFailure(message: e.toString()));
+      return Left(CacheFailure());
     } catch (e) {
-      return Left(GeneralFailure(message: e.toString()));
+      return Left(GeneralFailure());
     }
   }
 }

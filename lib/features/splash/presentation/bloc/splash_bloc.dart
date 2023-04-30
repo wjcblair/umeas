@@ -17,7 +17,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     final splashOrFailure = await getSplash(NoParams());
     return splashOrFailure.fold(
       (failure) {
-        emit(Error(message: failure.message));
+        emit(const Error(message: 'Error Initializing Splash'));
       },
       (splash) async {
         emit(Loading(splashLogo: splash.image));

@@ -1,17 +1,7 @@
 import '../../../../core/domain/failures/app_failure.dart';
 
-class WeakPasswordAuthFailure extends AppFailure {
-  const WeakPasswordAuthFailure({message = 'Weak Password Auth Failure'})
-      : super(message: message);
-}
+class WeakPasswordAuthFailure extends AppFailure {}
 
-class EmailAlreadyInUseAuthFailure extends AppFailure {
-  const EmailAlreadyInUseAuthFailure(
-      {message = 'Email Already In Use Auth Failure'})
-      : super(message: message);
-}
+class EmailAlreadyInUseAuthFailure extends AppFailure {}
 
-class InvalidEmailAuthFailure extends AppFailure {
-  const InvalidEmailAuthFailure({message = 'Invalid Email Auth Failure'})
-      : super(message: message);
-}
+class InvalidEmailAuthFailure extends AppFailure {}

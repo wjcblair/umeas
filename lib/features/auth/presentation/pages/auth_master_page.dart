@@ -15,7 +15,7 @@ class AuthMasterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<AuthBloc>(
       create: (context) {
         final authBloc = sl<AuthBloc>();
         authBloc.add(AuthInitializeEvent());

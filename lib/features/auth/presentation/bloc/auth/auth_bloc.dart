@@ -116,7 +116,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           // Handle the failure case if needed
         },
         (authUser) {
-          // Handle the success case if needed
+          print("google auth user: $authUser");
+          emit(const AuthLoggedOutState(
+            failure: null,
+            isLoading: false,
+          ));
+          emit(AuthLoggedInState(
+            user: authUser,
+            isLoading: false,
+          ));
         },
       );
     });

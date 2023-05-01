@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:umeas/features/auth/data/datasources/remote/i_auth_remote_datasource_contract.dart';
 
@@ -82,23 +81,44 @@ class FirebaseAuthDatasource implements IAuthRemoteDatasourceContract {
   }
 
   @override
-  Future<void> logInWithGoogle() async {
+  Future<AuthUserModel> logInWithGoogle() async {
     try {
-      final googleUser = await googleSignIn.signIn();
+      final googleSignIn = GoogleSignIn();
 
-      if (googleUser == null) {
-        throw GoogleSignInCancelledException();
+      await googleSignIn.signOut();
+
+      final googleSignInAccount = await googleSignIn.signIn();
+
+      if (googleSignInAccount == null) {
+        throw UserNotFoundAuthException();
       }
+      final googleSignInAuthentication =
+          await googleSignInAccount.authentication;
 
-      final googleAuthentication = await googleUser.authentication;
-      final authCredential = GoogleAuthProvider.credential(
-        accessToken: googleAuthentication.accessToken,
-        idToken: googleAuthentication.idToken,
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
       );
-      await firebaseAuth.signInWithCredential(authCredential);
-    } on PlatformException catch (_) {
-      throw GoogleSignInServerErrorException();
-    } catch (_) {
+
+      final userCredential =
+          await firebaseAuth.signInWithCredential(credential);
+
+      final user = userCredential.user;
+      // ignore: unnecessary_null_comparison
+      if (user != null) {
+        return AuthUserModel.fromFirebase(user);
+      } else {
+        throw UserNotLoggedInAuthException();
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'account-exists-with-different-credential') {
+        throw AccountExistsWithDifferentCredentialAuthException();
+      } else if (e.code == 'invalid-credential') {
+        throw InvalidCredentialAuthException();
+      } else {
+        throw GenericAuthException();
+      }
+    } catch (e) {
       throw GenericAuthException();
     }
   }

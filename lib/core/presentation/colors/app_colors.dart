@@ -68,4 +68,7 @@ class AppColors {
   static final Color onSuccess = _sysColors['on-success']!;
   static final Color successContainer = _sysColors['success-container']!;
   static final Color onSuccessContainer = _sysColors['on-success-container']!;
+
+  // overlay
+  static final Color barrierColor = Colors.black54.withAlpha(100);
 }

@@ -65,7 +65,7 @@ class AppTextStyles {
       fontSize: fontSize,
       letterSpacing: letterSpacing / 100,
       decoration: TextDecoration.none,
-      color: AppColors.surfaceVariant,
+      color: AppColors.white,
     );
   }
 }

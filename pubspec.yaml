@@ -21,7 +21,7 @@ dependencies:
   google_sign_in: ^6.1.0
 
   # Documentation
-  dartdoc: ^6.2.1
+  dartdoc: ^6.2.2
 
   # Value equality
   equatable: ^2.0.5

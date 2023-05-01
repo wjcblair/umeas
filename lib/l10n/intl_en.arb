@@ -29,6 +29,7 @@
     "login_view_forgot_password": "I forgot my password",
     "login_view_dont_have_an_account": "Dont have an account?",
     "login_view_sign_up": "Sign up",
+    "google_sign_in": "SIGN IN WITH GOOGLE",
 
     "email_text_field_placeholder": "Enter your email here",
     "password_text_field_placeholder": "Enter your password here",

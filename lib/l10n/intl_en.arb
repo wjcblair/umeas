@@ -2,6 +2,7 @@
     "push_button_text": "You have pushed the button this many times:",
 
     "logout_button": "Log out",
+    "settings_button": "Settings",
     "note": "Note",
     "cancel": "Cancel",
     "yes": "Yes",

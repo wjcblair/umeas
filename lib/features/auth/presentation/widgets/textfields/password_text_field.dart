@@ -29,7 +29,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: const TextStyle(fontSize: 18.0),
+      style: const TextStyle(
+        fontSize: 18.0,
+        color: Colors.black,
+      ),
       textAlignVertical: TextAlignVertical.center,
       textInputAction: TextInputAction.done,
       autovalidateMode: AutovalidateMode.onUserInteraction,

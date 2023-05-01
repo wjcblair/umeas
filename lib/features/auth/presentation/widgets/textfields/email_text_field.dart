@@ -14,7 +14,10 @@ class EmailTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: const TextStyle(fontSize: 18.0),
+      style: const TextStyle(
+        fontSize: 18.0,
+        color: Colors.black,
+      ),
       textAlignVertical: TextAlignVertical.center,
       textInputAction: TextInputAction.next,
       autovalidateMode: AutovalidateMode.onUserInteraction,

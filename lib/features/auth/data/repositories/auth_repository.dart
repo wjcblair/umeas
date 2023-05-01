@@ -1,5 +1,5 @@
 import 'package:umeas/features/auth/data/datasources/exceptions/generic_exceptions.dart';
-import 'package:umeas/features/auth/data/datasources/remote/i_auth_remote_datasource.dart';
+import 'package:umeas/features/auth/data/datasources/remote/i_auth_remote_datasource_contract.dart';
 import 'package:umeas/features/auth/domain/entities/auth_user.dart';
 
 import 'package:dartz/dartz.dart';
@@ -33,7 +33,7 @@ class AuthRepository implements IAuthRepositoryContract {
     try {
       return Right(remoteDatasource.initialize());
     } catch (e) {
-      return const Left(InitializeAuthFailure());
+      return Left(InitializeAuthFailure());
     }
   }
 
@@ -44,9 +44,9 @@ class AuthRepository implements IAuthRepositoryContract {
       return Right(
           await remoteDatasource.logIn(email: email, password: password));
     } on InvalidEmailAndPasswordCombinationException {
-      return const Left(InvalidEmailAndPasswordCombinationFailure());
+      return Left(InvalidEmailAndPasswordCombinationFailure());
     } catch (_) {
-      return const Left(GenericAuthFailure());
+      return Left(GenericAuthFailure());
     }
   }
 
@@ -56,9 +56,9 @@ class AuthRepository implements IAuthRepositoryContract {
       return Right(remoteDatasource.logOut());
     } on UserNotLoggedInAuthException {
       // print("User not logged in");
-      return const Left(UserNotLoggedInAuthFailure());
+      return Left(UserNotLoggedInAuthFailure());
     } catch (_) {
-      return const Left(GenericAuthFailure());
+      return Left(GenericAuthFailure());
     }
   }
 
@@ -67,11 +67,11 @@ class AuthRepository implements IAuthRepositoryContract {
     try {
       return Right(remoteDatasource.logInWithGoogle());
     } on GoogleSignInCancelledException {
-      return const Left(GoogleSignInCancelledFailure());
+      return Left(GoogleSignInCancelledFailure());
     } on GoogleSignInServerErrorException {
-      return const Left(GoogleSignInServerFailure());
+      return Left(GoogleSignInServerFailure());
     } catch (_) {
-      return const Left(GenericAuthFailure());
+      return Left(GenericAuthFailure());
     }
   }
 
@@ -82,16 +82,16 @@ class AuthRepository implements IAuthRepositoryContract {
       return Right(await remoteDatasource.registerUser(
           email: email, password: password));
     } on UserNotLoggedInAuthException {
-      return const Left(UserNotLoggedInAuthFailure());
+      return Left(UserNotLoggedInAuthFailure());
     } on WeakPasswordAuthException {
-      return const Left(WeakPasswordAuthFailure());
+      return Left(WeakPasswordAuthFailure());
     } on EmailAlreadyInUseAuthException {
       // print("Email already in use exception");
-      return const Left(EmailAlreadyInUseAuthFailure());
+      return Left(EmailAlreadyInUseAuthFailure());
     } on InvalidEmailAuthException {
-      return const Left(InvalidEmailAuthFailure());
+      return Left(InvalidEmailAuthFailure());
     } catch (_) {
-      return const Left(GenericAuthFailure());
+      return Left(GenericAuthFailure());
     }
   }
 
@@ -100,7 +100,7 @@ class AuthRepository implements IAuthRepositoryContract {
     try {
       return Right(remoteDatasource.sendEmailVerification());
     } on UserNotLoggedInAuthException {
-      return const Left(UserNotLoggedInAuthFailure());
+      return Left(UserNotLoggedInAuthFailure());
     }
   }
 
@@ -110,11 +110,11 @@ class AuthRepository implements IAuthRepositoryContract {
     try {
       return Right(remoteDatasource.sendPasswordReset(toEmail: toEmail));
     } on InvalidEmailAuthException {
-      return const Left(InvalidEmailAuthFailure());
+      return Left(InvalidEmailAuthFailure());
     } on UserNotFoundAuthException {
       return Left(UserNotFoundAuthFailure());
     } catch (_) {
-      return const Left(GenericAuthFailure());
+      return Left(GenericAuthFailure());
     }
   }
 }

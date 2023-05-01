@@ -63,9 +63,9 @@ class AuthRepository implements IAuthRepositoryContract {
   }
 
   @override
-  Future<Either<AppFailure, void>> logInWithGoogle() async {
+  Future<Either<AppFailure, AuthUser>> logInWithGoogle() async {
     try {
-      return Right(remoteDatasource.logInWithGoogle());
+      return Right(await remoteDatasource.logInWithGoogle());
     } on GoogleSignInCancelledException {
       return Left(GoogleSignInCancelledFailure());
     } on GoogleSignInServerErrorException {

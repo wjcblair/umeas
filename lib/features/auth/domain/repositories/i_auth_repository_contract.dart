@@ -17,5 +17,5 @@ abstract class IAuthRepositoryContract {
   Future<Either<AppFailure, void>> logOut();
   Future<Either<AppFailure, void>> sendEmailVerification();
   Future<Either<AppFailure, void>> sendPasswordReset({required String toEmail});
-  Future<Either<AppFailure, void>> logInWithGoogle();
+  Future<Either<AppFailure, AuthUser>> logInWithGoogle();
 }

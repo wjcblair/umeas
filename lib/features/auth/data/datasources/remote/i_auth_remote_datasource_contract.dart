@@ -5,7 +5,7 @@ abstract class IAuthRemoteDatasourceContract {
   AuthUserModel getCurrentUser();
   Future<AuthUserModel> logIn(
       {required String email, required String password});
-  Future<void> logInWithGoogle();
+  Future<AuthUserModel> logInWithGoogle();
   Future<AuthUserModel> registerUser(
       {required String email, required String password});
   Future<void> sendEmailVerification();

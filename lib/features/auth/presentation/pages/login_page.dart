@@ -160,6 +160,29 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 720, minWidth: 200),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16, right: 24),
+                  child: ButtonTheme(
+                    minWidth: 88.0,
+                    height: 40.0,
+                    child: TextButton(
+                      onPressed: () => context
+                          .read<AuthBloc>()
+                          .add(AuthLogInWithGoogleEvent()),
+                      child: Text(context.loc.google_sign_in,
+                          style: const TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                            letterSpacing: 1,
+                          ),
+                          textAlign: TextAlign.center),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         );

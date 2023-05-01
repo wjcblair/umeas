@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:umeas/features/auth/data/datasources/remote/i_auth_remote_datasource.dart';
+import 'package:umeas/features/auth/data/datasources/remote/i_auth_remote_datasource_contract.dart';
 
 import '../../../../../firebase_options.dart';
 import '../../models/auth_user_model.dart';

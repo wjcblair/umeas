@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:umeas/core/assets/image_assets.dart';
-import 'package:umeas/core/constants/screen_constants.dart';
 import 'package:umeas/core/extensions/buildcontext/loc.dart';
 import 'package:umeas/core/mixins/overlay_mixin.dart';
 import 'package:umeas/core/presentation/routes/route_manager.dart';

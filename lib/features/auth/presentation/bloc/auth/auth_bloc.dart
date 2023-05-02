@@ -12,6 +12,7 @@ import 'package:umeas/features/auth/domain/usecases/verify_email/verify_email.da
 import '../../../../../core/domain/failures/app_failure.dart';
 import '../../../../../core/domain/usecases/noparams.dart';
 import '../../../domain/entities/auth_user.dart';
+import '../../../domain/entities/email_provider.dart';
 import '../../../domain/usecases/core/auth_user_params.dart';
 import '../../../domain/usecases/register/register.dart';
 
@@ -50,21 +51,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           ));
         },
         (initialize) async {
-          final userOrFailure = await getCurrentUser(NoParams());
-          userOrFailure.fold(
+          final authUserOrFailure = await getCurrentUser(NoParams());
+          authUserOrFailure.fold(
             (failure) {
               emit(const AuthLoggedOutState(
                 failure: null,
                 isLoading: false,
               ));
             },
-            (user) {
-              if (!user.isEmailVerified) {
+            (authUser) {
+              if (!authUser.isEmailVerified) {
                 emit(const AuthNeedsVerificationState(isLoading: false));
               } else {
                 emit(AuthLoggedInState(
-                  user: user,
+                  user: authUser,
                   isLoading: false,
+                  emailProvider: _getEmailProviderFromDomain(authUser.email),
                 ));
               }
             },
@@ -103,6 +105,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthLoggedInState(
             user: authUser,
             isLoading: false,
+            emailProvider: _getEmailProviderFromDomain(authUser.email),
           ));
         }
       });
@@ -116,7 +119,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           // Handle the failure case if needed
         },
         (authUser) {
-          print("google auth user: $authUser");
           emit(const AuthLoggedOutState(
             failure: null,
             isLoading: false,
@@ -124,6 +126,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthLoggedInState(
             user: authUser,
             isLoading: false,
+            emailProvider: _getEmailProviderFromDomain(authUser.email),
           ));
         },
       );
@@ -215,5 +218,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         (verifyEmail) => state, // Re-emit the current state
       ));
     });
+  }
+
+  EmailProvider _getEmailProviderFromDomain(String email) {
+    final emailDomain = email.split('@').last.toLowerCase();
+
+    if (emailDomain == 'gmail.com') {
+      return EmailProvider.google;
+    } else if (emailDomain == 'outlook.com' ||
+        emailDomain == 'live.com' ||
+        emailDomain == 'hotmail.com' ||
+        emailDomain.endsWith('.edu')) {
+      return EmailProvider.microsoft;
+    } else {
+      // Check if the custom domain belongs to Google Workspace or Microsoft 365
+      // For simplicity, we'll assume unknown for now
+      return EmailProvider.unknown;
+    }
   }
 }

@@ -40,9 +40,11 @@ class AuthForgotPasswordState extends AuthState {
 
 class AuthLoggedInState extends AuthState {
   final AuthUser user;
+  final EmailProvider emailProvider;
   const AuthLoggedInState({
     required this.user,
     required bool isLoading,
+    required this.emailProvider,
   }) : super(
           isLoading: isLoading,
         );

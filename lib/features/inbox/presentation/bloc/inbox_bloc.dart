@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:umeas/features/inbox/domain/usecases/fetch_messages.dart';
 
-import '../../../../core/domain/usecases/noparams.dart';
+import '../../../auth/domain/entities/email_provider.dart';
 import '../../domain/entities/message.dart';
 
 part 'inbox_event.dart';
@@ -12,17 +12,25 @@ class InboxBloc extends Bloc<InboxEvent, InboxState> {
 
   InboxBloc({required this.fetchMessages}) : super(const InboxInitialState()) {
     on<InboxLoadMessagesEvent>((event, emit) async {
-      // print('login with google event');
-      final messages = await fetchMessages(NoParams());
+      final EmailProvider provider;
+      if (event == const InboxLoadMessagesWithGoogleApiEvent()) {
+        provider = EmailProvider.google;
+      } else {
+        provider = EmailProvider.microsoft;
+      }
+      final messages =
+          await fetchMessages(FetchMessagesParams(emailProvider: provider));
       return messages.fold(
         (failure) {
-          print('failure');
           emit(const InboxErrorState());
         },
         (messages) {
           emit(InboxLoadedState(messages: messages));
         },
       );
+    });
+    on<InboxNoMessagesToLoadEvent>((event, emit) {
+      emit(const InboxNoMessagesState());
     });
   }
 }

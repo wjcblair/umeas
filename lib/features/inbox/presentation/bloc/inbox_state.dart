@@ -17,6 +17,10 @@ class InboxLoadedState extends InboxState {
   const InboxLoadedState({required this.messages});
 }
 
+class InboxNoMessagesState extends InboxState {
+  const InboxNoMessagesState();
+}
+
 class InboxErrorState extends InboxState {
   const InboxErrorState();
 }

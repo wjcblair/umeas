@@ -56,9 +56,8 @@ dependencies:
   # Messages
   fluttertoast: ^8.2.1
 
-  # Images
-  image_picker: ^0.8.7+4
-  cached_network_image: ^3.2.3
+  # Google APIs
+  googleapis: ^11.0.0
 
 
 
@@ -82,6 +81,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - credentials/
     - config/
     - tokens/
     - assets/images/um_logo.png

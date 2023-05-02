@@ -5,9 +5,16 @@ class AuthUser extends Equatable {
   final String email;
   final bool isEmailVerified;
 
-  const AuthUser(
-      {required this.id, required this.email, required this.isEmailVerified});
+  const AuthUser({
+    required this.id,
+    required this.email,
+    required this.isEmailVerified,
+  });
 
   @override
-  List<Object?> get props => [id, email, isEmailVerified];
+  List<Object?> get props => [
+        id,
+        email,
+        isEmailVerified,
+      ];
 }
